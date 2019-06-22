@@ -1,0 +1,100 @@
+import java.io.*;
+import java.net.Socket;
+import java.sql.SQLException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.net.ServerSocket;
+
+public class HttpServer1 {
+
+    /**
+     * WEB_ROOT is the directory where our HTML and other files reside. For this
+     * package, WEB_ROOT is the "webroot" directory under the working directory.
+     * The working directory is the location in the file system from where the
+     * java command was invoked.
+	 *
+	 * Authors Rodionov, Sinitsyna
+     */
+	private static final int NTHREADS = 100;
+	private static final Executor exec
+	= Executors.newFixedThreadPool(NTHREADS);
+	
+    // shutdown command
+    private static final String SHUTDOWN_COMMAND = "/SHUTDOWN";
+
+    // the shutdown command received
+    private boolean shutdown = false;
+
+    public static void main(String[] args) {
+        HttpServer1 server = new HttpServer1();
+        server.await();
+    }
+
+    public void handleRequest(Socket connection) throws SQLException, ClassNotFoundException {
+    	try (
+    		InputStream input = connection.getInputStream();
+    		OutputStream output = connection.getOutputStream();   			
+    			)
+    	{
+    		// create Request object and parse
+            Request request = new Request(input);
+            request.parse();
+
+            // create Response object
+            Response response = new Response(output);
+            // check if this is a request for a servlet or a static resource
+            // a request for a servlet begins with "/servlet/"
+            Processor processor;
+
+			if (request.getURI().startsWith("/servlet/")) {
+                processor = new ServletProcessor();
+            } else {
+                processor = new StaticResourceProcessor();
+            }
+            
+            processor.process(request, response);
+
+            //check if the previous URI is a shutdown command
+            //connection.close();
+            shutdown = request.getURI().equals(SHUTDOWN_COMMAND);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
+    }
+    
+    public void await() {
+        int port = 8891;
+
+        // Loop waiting for a request
+        	try(
+        			ServerSocket socket = new ServerSocket(port);       			
+        			)
+        	{
+        	    System.out.println("Server is waiting for request at port: " + port);
+        	    while (!shutdown) {
+            		final Socket connection = socket.accept();
+            		Runnable task = new Runnable() {
+            		public void run() {
+                        try {
+                            handleRequest(connection);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+            		};
+            		exec.execute(task);
+            		}
+                	    		
+        	}
+        	catch(Exception e) {
+    			e.printStackTrace();
+    			System.exit(1);
+    		}
+        }
+    
+ 
+}
+
