@@ -1,13 +1,7 @@
-import java.io.OutputStream;
-import java.io.IOException;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.File;
-import java.io.PrintWriter;
-import java.util.Date;
-import java.util.Locale;
-import javax.servlet.ServletResponse;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.ServletResponse;
+import java.io.*;
+import java.util.Locale;
 
 public class Response implements ServletResponse {
 

@@ -1,9 +1,5 @@
-import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
 import org.json.simple.JSONObject;
-import org.junit.Assert;
 import org.junit.Test;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class SenderTest {
     @Test
