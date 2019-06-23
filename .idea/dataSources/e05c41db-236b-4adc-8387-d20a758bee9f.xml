@@ -1110,57 +1110,5 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="279" parent="6" name="fruits"/>
-    <column id="280" parent="279" name="id">
-      <Position>1</Position>
-      <DataType>mediumint(9)|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="281" parent="279" name="naming">
-      <Position>2</Position>
-      <DataType>varchar(26)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="282" parent="279" name="description">
-      <Position>3</Position>
-      <DataType>varchar(200)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="283" parent="279" name="manufacturer">
-      <Position>4</Position>
-      <DataType>varchar(26)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="284" parent="279" name="numberOfProduct">
-      <Position>5</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="285" parent="279" name="price">
-      <Position>6</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="286" parent="279" name="naming">
-      <ColNames>naming</ColNames>
-      <Unique>1</Unique>
-      <Type>btree</Type>
-    </index>
-    <key id="287" parent="279" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <key id="288" parent="279" name="naming">
-      <ColNames>naming</ColNames>
-      <UnderlyingIndexName>naming</UnderlyingIndexName>
-    </key>
   </database-model>
 </dataSource>
