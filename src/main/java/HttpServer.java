@@ -5,7 +5,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.net.ServerSocket;
 
-public class HttpServer1 {
+public class HttpServer {
 
     /**
      * WEB_ROOT is the directory where our HTML and other files reside. For this
@@ -26,7 +26,7 @@ public class HttpServer1 {
     private boolean shutdown = false;
 
     public static void main(String[] args) {
-        HttpServer1 server = new HttpServer1();
+        HttpServer server = new HttpServer();
         server.await();
     }
 

@@ -210,40 +210,40 @@ public class Request implements ServletRequest {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    @Override
-    public ServletContext getServletContext() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+//    @Override
+//    public ServletContext getServletContext() {
+//        throw new UnsupportedOperationException("Not supported yet.");
+//    }
 
-    @Override
-    public AsyncContext startAsync() throws IllegalStateException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+//    @Override
+//    public AsyncContext startAsync() throws IllegalStateException {
+//        throw new UnsupportedOperationException("Not supported yet.");
+//    }
+//
+//    @Override
+//    public AsyncContext startAsync(ServletRequest servletRequest, ServletResponse servletResponse) throws IllegalStateException {
+//        throw new UnsupportedOperationException("Not supported yet.");
+//    }
+//
+//    @Override
+//    public boolean isAsyncStarted() {
+//        throw new UnsupportedOperationException("Not supported yet.");
+//    }
+//
+//    @Override
+//    public boolean isAsyncSupported() {
+//        throw new UnsupportedOperationException("Not supported yet.");
+//    }
 
-    @Override
-    public AsyncContext startAsync(ServletRequest servletRequest, ServletResponse servletResponse) throws IllegalStateException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean isAsyncStarted() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean isAsyncSupported() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public AsyncContext getAsyncContext() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public DispatcherType getDispatcherType() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+//    @Override
+//    public AsyncContext getAsyncContext() {
+//        throw new UnsupportedOperationException("Not supported yet.");
+//    }
+//
+//    @Override
+//    public DispatcherType getDispatcherType() {
+//        throw new UnsupportedOperationException("Not supported yet.");
+//    }
 
 	public long getContentLengthLong() {
 		// TODO Auto-generated method stub
