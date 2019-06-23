@@ -15,7 +15,7 @@ public class Sender {
         jsonObject.put("manufacturer", "fruits");
         jsonObject.put("naming", "1234");
         jsonObject.put("price", 5);
-        jsonObject.put("numberOfProduct", 1234);
+        jsonObject.put("quantity", 1234);
 
         JSONObject jsonObject0 = new JSONObject();
         jsonObject0.put("group", "fruits");
@@ -23,23 +23,23 @@ public class Sender {
         jsonObject0.put("manufacturer", "fruits");
         jsonObject0.put("naming", "777777");
         jsonObject0.put("price", 5);
-        jsonObject0.put("numberOfProduct", 1234);
+        jsonObject0.put("quantity", 1234);
 
         JSONObject jsonObject2 = new JSONObject();
         jsonObject2.put("group", "fruits");
         jsonObject2.put("description", "fruits");
         jsonObject2.put("manufacturer", "fruits");
-        jsonObject2.put("id", 1);
+        jsonObject2.put("id", 2);
         jsonObject2.put("price", 5);
-        jsonObject2.put("field", "numberOfProduct");
-        jsonObject2.put("numberOfProduct", "868686868");
+        jsonObject2.put("field", "quantity");
+        jsonObject2.put("quantity", "868686868");
         System.out.println(jsonObject.toString());
         token = aut("http://localhost:8891/login", "admin", "1234");
         doPut("http://localhost:8891/api/good", jsonObject, token);
         doPut("http://localhost:8891/api/good", jsonObject0, token);
         doPost("http://localhost:8891/api/good", jsonObject2, token);
-        //doGet("http://localhost:8891/api/good/1", token);
-        //doDelete("http://localhost:8891/api/good/1", token);
+        doGet("http://localhost:8891/api/good/fruits", token);
+        //doDelete("http://localhost:8891/api/good/8", token);
     }
 
     public static String doPost(String urlpath, JSONObject json, String token) {
@@ -66,7 +66,7 @@ public class Sender {
                 }
                 bufferedReader.close();
 
-               System.out.println(stringBuilder.toString());
+                System.out.println(stringBuilder.toString());
                 return stringBuilder.toString();
             } else {
                 System.out.println(connection.getResponseMessage());
@@ -159,7 +159,7 @@ public class Sender {
         }
     }
 
-    public static String doDelete(String urlpath, String token) throws Exception {
+    public static String doDelete(String urlpath, String token) {
         HttpURLConnection connection = null;
         try {
             URL url=new URL(urlpath);

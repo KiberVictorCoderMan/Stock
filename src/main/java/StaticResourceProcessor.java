@@ -26,6 +26,14 @@ public class StaticResourceProcessor implements Processor {
     return token;
   }
 
+  public boolean isNumber(String str) {
+    if (str == null || str.isEmpty()) return false;
+    for (int i = 0; i < str.length(); i++) {
+      if (!Character.isDigit(str.charAt(i))) return false;
+    }
+    return true;
+  }
+
   @Override
   public void process(Request request, Response response) throws IOException {
     try {
@@ -41,7 +49,8 @@ public class StaticResourceProcessor implements Processor {
         if (request.getType().equals("POST") && request.getURI().equals("/api/good")) {
           response.sendText(post(request.getBody()));
         } else if (request.getType().equals("GET") && request.getURI().substring(0, request.getURI().lastIndexOf("/")).equals("/api/good")) {
-          response.sendText(get(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)));
+          if(isNumber(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)))response.sendText(get(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)));
+          else response.sendText(getAllTable(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)));
         } else if (request.getType().equals("DELETE") && request.getURI().substring(0, request.getURI().lastIndexOf("/")).equals("/api/good")) {
           response.sendText(delete(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)));
         } else if (request.getType().equals("PUT") && request.getURI().equals("/api/good")) {
@@ -65,11 +74,11 @@ public class StaticResourceProcessor implements Processor {
     }
     if(get(String.valueOf(jsonObject.get("id"))).equals("404 Not Found")) return "404 Not Found";
     try {
-        //    public void updateItem(String tableName, int index, String column, String value){
+      //    public void updateItem(String tableName, int index, String column, String value){
       String coll = (String)jsonObject.get("field");
       stockServiceJDBC.updateItem((String) jsonObject.get("group"), (long) jsonObject.get("id"), coll, (String) jsonObject.get(coll));
     } catch (Exception e) {
-        e.printStackTrace();
+      e.printStackTrace();
       return "409 Conflict";
     }
     return "204 No Content";
@@ -80,24 +89,41 @@ public class StaticResourceProcessor implements Processor {
     System.out.println(jsonStr);
     JSONObject jsonObject = null;
     jsonObject = (JSONObject) parser.parse(jsonStr.toString());
-    if((long)jsonObject.get("numberOfProduct") < 0) return "409 Conflict";
+    if((long)jsonObject.get("quantity") < 0) return "409 Conflict";
     try {
-    stockServiceJDBC.insertProduct((String)jsonObject.get("group"), (String) jsonObject.get("naming"), (String) jsonObject.get("description"), (String) jsonObject.get("manufacturer"), (long) jsonObject.get("price"), (long) jsonObject.get("numberOfProduct"));
+      stockServiceJDBC.insertProduct((String)jsonObject.get("group"), (String) jsonObject.get("naming"), (String) jsonObject.get("description"), (String) jsonObject.get("manufacturer"), (long) jsonObject.get("price"), (long) jsonObject.get("quantity"));
     }catch (Exception e) {
       try {
-         stockServiceJDBC.createTable((String) jsonObject.get("group"));
-         stockServiceJDBC.insertProduct((String)jsonObject.get("group"), (String) jsonObject.get("naming"), (String) jsonObject.get("description"), (String) jsonObject.get("manufacturer"), (long) jsonObject.get("price"), (long)jsonObject.get("numberOfProduct"));
+        stockServiceJDBC.createTable((String) jsonObject.get("group"));
+        stockServiceJDBC.insertProduct((String)jsonObject.get("group"), (String) jsonObject.get("naming"), (String) jsonObject.get("description"), (String) jsonObject.get("manufacturer"), (long) jsonObject.get("price"), (long)jsonObject.get("quantity"));
       } catch (Exception e2) {
-          return "409 Conflict";
+        return "409 Conflict";
       }
     }
     return "201 Created";
   }
 
-  public String get(String id) throws SQLException {
+  public String get(String id) {
     JSONObject jsonObject = new JSONObject();
     try{
-      ResultSet resultSet = stockServiceJDBC.readAllDB();//(Integer.parseInt(id));
+      ResultSet resultSet = stockServiceJDBC.getProductId(Long.parseLong(id));
+      resultSet.first();
+      jsonObject.put("naming", resultSet.getString("naming"));
+      jsonObject.put("quantity", resultSet.getString("quantity"));
+      jsonObject.put("description", resultSet.getString("description"));
+      jsonObject.put("manufacturer", resultSet.getString("manufacturer"));
+      jsonObject.put("id", resultSet.getString("id"));
+    } catch (Exception e) {
+      e.printStackTrace();
+      return "404 Not Found";
+    }
+    return "200 Ok " + jsonObject.toString();
+  }
+/*
+  public String getTable(String table) {
+    JSONObject jsonObject = new JSONObject();
+    try{
+      ResultSet resultSet = stockServiceJDBC.getProductId(Integer.parseInt(id));
       resultSet.first();
       resultSet.next();
       jsonObject.put("naming", resultSet.getString("naming"));
@@ -106,11 +132,31 @@ public class StaticResourceProcessor implements Processor {
       jsonObject.put("manufacturer",resultSet.getString("manufacturer"));
       jsonObject.put("id",resultSet.getString("id"));
     } catch (SQLException e) {
-        e.printStackTrace();
+      e.printStackTrace();
       return "404 Not Found";
     }
-     // return "200 Ok " + jsonObject.toString();
-      return "200 Ok ";
+    return "200 Ok " + jsonObject.toString();
+  }*/
+
+  public String getAllTable(String table) {
+    JSONObject jsonObject = new JSONObject();
+    String allDb = "";
+    try{
+      ResultSet resultSet = stockServiceJDBC.readTable(table);
+      while (resultSet.next()) {
+        jsonObject = new JSONObject();
+        jsonObject.put("naming", resultSet.getString("naming"));
+        jsonObject.put("quantity", resultSet.getString("quantity"));
+        jsonObject.put("description", resultSet.getString("description"));
+        jsonObject.put("manufacturer", resultSet.getString("manufacturer"));
+        jsonObject.put("id", resultSet.getString("id"));
+        allDb += jsonObject.toString() + "\n";
+        System.out.println(jsonObject.toString());
+      }
+    } catch (SQLException e) {
+      return "404 Not Found";
+    }
+    return "200 Ok " + "\n" + allDb;
   }
 
   public String login(String login, String password) {
@@ -128,9 +174,9 @@ public class StaticResourceProcessor implements Processor {
 
   public String delete(String id) throws SQLException {
     try{
-    stockServiceJDBC.delete(Integer.parseInt(id));
+      stockServiceJDBC.delete(Integer.parseInt(id));
     } catch (NullPointerException e) {
-    return "404 Not Found";
+      return "404 Not Found";
     }
     return "204 No Content";
   }

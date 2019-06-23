@@ -15,34 +15,34 @@ public class StockServiceJDBC {
     Statement statement;
 
     StockServiceJDBC() throws ClassNotFoundException, SQLException {
-            Class.forName(JDBC_DRIVER);
-            connection = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
-            statement = connection.createStatement();
-            DatabaseMetaData md = connection.getMetaData();
-            ResultSet rs = md.getTables(null, null, "%", null);
-            while (rs.next()) {
-                tablesList.add(rs.getString(3));
-            }
+        Class.forName(JDBC_DRIVER);
+        connection = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
+        statement = connection.createStatement();
+        DatabaseMetaData md = connection.getMetaData();
+        ResultSet rs = md.getTables(null, null, "%", null);
+        while (rs.next()) {
+            tablesList.add(rs.getString(3));
+        }
     }
 /*
     public void createProductTable(String groupName) throws SQLException {
-        String SQL = "CREATE TABLE " + groupName + " " + " (naming VARCHAR(50), " + " description VARCHAR(50), " + " manufacturer VARCHAR(50), " + " numberOfProduct INTEGER not NULL, " + " price INTEGER not NULL, " + " id INTEGER not NULL)";
+        String SQL = "CREATE TABLE " + groupName + " " + " (naming VARCHAR(50), " + " description VARCHAR(50), " + " manufacturer VARCHAR(50), " + " quantity INTEGER not NULL, " + " price INTEGER not NULL, " + " id INTEGER not NULL)";
         statement.executeUpdate(SQL);
         tablesList.add(groupName);
     }
 */
 
     public void createTable(String nameTable) throws SQLException {
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS " +
-                     nameTable + " (" +
-                    " id MEDIUMINT NOT NULL AUTO_INCREMENT,"+
-                    " naming VARCHAR(26) NOT NULL," +
-                    " description VARCHAR(200) NOT NULL," +
-                    " manufacturer VARCHAR(26) NOT NULL," +
-                    " numberOfProduct INT NOT NULL," +
-                    " price INT NOT NULL," +
-                    " PRIMARY KEY (id)," +
-                    " UNIQUE KEY (naming))");
+        statement.executeUpdate("CREATE TABLE IF NOT EXISTS " +
+                nameTable + " (" +
+                " id MEDIUMINT NOT NULL AUTO_INCREMENT,"+
+                " naming VARCHAR(26) NOT NULL," +
+                " description VARCHAR(200) NOT NULL," +
+                " manufacturer VARCHAR(26) NOT NULL," +
+                " quantity INT NOT NULL," +
+                " price INT NOT NULL," +
+                " PRIMARY KEY (id)," +
+                " UNIQUE KEY (naming))");
     }
 
     public ResultSet readGroup(String groupName) throws SQLException {
@@ -50,20 +50,25 @@ public class StockServiceJDBC {
         return statement.executeQuery(SQL);
     }
 
-    public ResultSet readAllDB() throws SQLException {
+    public ResultSet readTable(String table) throws SQLException {
+        /*
         String tables = "";
         String selectQ = "";
         String whereQ = "";
         for(int i = 0; i < tablesList.size(); i++) {
             tables += tablesList.get(i);
-            selectQ += tablesList.get(i) + ".naming, " + tablesList.get(i) + ".description, " + tablesList.get(i) + ".manufacturer, " + tablesList.get(i) + ".id, " + tablesList.get(i) + ".numberOfProduct";
+            selectQ += tablesList.get(i) + ".naming, " + tablesList.get(i) + ".description, " + tablesList.get(i) + ".manufacturer, " + tablesList.get(i) + ".id, " + tablesList.get(i) + ".quantity";
             if(i != tablesList.size() - 1) {
                 tables += ", ";
                 selectQ += " AND ";
             }
         }
-        System.out.println("************** " + tables + " *********************** " + selectQ + " ************************ " + whereQ);
         String SQL = "SELECT " + selectQ + " FROM " + tables;
+        System.out.println("************** " + SQL);
+        return statement.executeQuery(SQL);*/
+        String selectQ = "";
+        String SQL = "SELECT * " + " FROM " + table;
+        System.out.println("************** " + SQL);
         return statement.executeQuery(SQL);
     }
 
@@ -73,7 +78,7 @@ public class StockServiceJDBC {
     }
 
     public void updateProductNumberId(String groupName, long product, long newNumber) throws SQLException {
-        String SQL = "UPDATE " + groupName + " SET numberOfProduct = " + newNumber + " WHERE id = '" + product + "'";
+        String SQL = "UPDATE " + groupName + " SET quantity = " + newNumber + " WHERE id = '" + product + "'";
         statement.executeUpdate(SQL);
     }
 
@@ -94,11 +99,11 @@ public class StockServiceJDBC {
     }
 */
 
-    public void insertProduct(String groupName, String naming, String description, String manufacturer, long price,  long numberOfProduct) throws SQLException {
-        statement.executeUpdate("INSERT INTO " + groupName + " (naming, description, manufacturer, price, numberOfProduct) " + "VALUES " +
-                    "(" + "'" + naming + "'," + "'" + description + "'," +
-                    "'" + manufacturer + "'," + price + "," + numberOfProduct + ")");
-   }
+    public void insertProduct(String groupName, String naming, String description, String manufacturer, long price,  long quantity) throws SQLException {
+        statement.executeUpdate("INSERT INTO " + groupName + " (naming, description, manufacturer, price, quantity) " + "VALUES " +
+                "(" + "'" + naming + "'," + "'" + description + "'," +
+                "'" + manufacturer + "'," + price + "," + quantity + ")");
+    }
 
     public void deleteProduct(String groupName, String product) throws SQLException {
         String SQL = "DELETE FROM " + groupName + " WHERE naming = '" + product + "'";
@@ -135,7 +140,7 @@ public class StockServiceJDBC {
         String whereQ = "";
         for(int i = 0; i < tablesList.size(); i++) {
             tables += tablesList.get(i);
-            selectQ += tablesList.get(i) + ".naming, " + tablesList.get(i) + ".description, " + tablesList.get(i) + ".manufacturer, " + tablesList.get(i) + ".id, " + tablesList.get(i) + ".price, " + tablesList.get(i) + ".numberOfProduct";
+            selectQ += tablesList.get(i) + ".naming, " + tablesList.get(i) + ".description, " + tablesList.get(i) + ".manufacturer, " + tablesList.get(i) + ".id, " + tablesList.get(i) + ".price, " + tablesList.get(i) + ".quantity";
             if(i != tablesList.size() - 1) {
                 tables += ", ";
                 selectQ += " AND ";
@@ -144,8 +149,8 @@ public class StockServiceJDBC {
             else whereQ += " AND " + tablesList.get(i) + "." + "id = " + idPr;
 
         }
-        System.out.println("************** " + tables + " *********************** " + selectQ + " ************************ " + whereQ);
         String SQL = "SELECT " + selectQ + " FROM " + tables + " WHERE " + whereQ;
+        System.out.println("************** " + SQL);
         return statement.executeQuery(SQL);
     }
 
