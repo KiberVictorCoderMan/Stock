@@ -201,6 +201,12 @@ public class StockServiceJDBC {
         connection.close();
     }
 
+<<<<<<< HEAD
 
+=======
+    public ArrayList getAllTables(){
+        return tablesList;
+    }
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
 
 }

@@ -2,13 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="de984226-d10f-48b2-9951-2c35e1d9b4a6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e05c41db-236b-4adc-8387-d20a758bee9f.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e05c41db-236b-4adc-8387-d20a758bee9f.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Crypto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Serialization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/HttpServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HttpServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Processor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Processor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Sender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Product.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/StoreTableModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/StaticResourceProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StaticResourceProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/StockServiceJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StockServiceJDBC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/SenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SenderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Hash.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Hash.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/HttpServer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/HttpServer$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/HttpServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/HttpServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Processor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Processor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Product.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Request.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Request.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Response.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Response.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Sender.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Sender.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ServletProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ServletProcessor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/StaticResourceProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/StaticResourceProcessor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/StockServiceJDBC.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/StockServiceJDBC.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/SenderTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/SenderTest.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,6 +34,9 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/HW2$Sender.ic" NAME="Sender Coverage Results" MODIFIED="1561391177346" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -28,32 +49,147 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
+<<<<<<< HEAD
     <expand />
     <select />
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="testRunner" value="GRADLE" />
     <option name="delegatedBuild" value="true" />
+=======
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="stock@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="stock@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="stock@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="stock: schema" type="c314c289:MysqlImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="stock@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="collations" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-670525707">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="iml" value="1" />
+          <entry key="java" value="5" />
+          <entry key="xml" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="IDEA_MODULE" value="1" />
+          <entry key="JAVA" value="5" />
+          <entry key="XML" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="xml" value="10" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="XML" value="10" />
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="352611545">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.35" value="1" />
+          <entry key="project.open.time.42" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="fruits" value="3" />
+          <entry key="java" value="40" />
+          <entry key="sql" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Database Element" value="3" />
+          <entry key="JAVA" value="40" />
+          <entry key="Scratch" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="895" />
+          <entry key="sql" value="13" />
+          <entry key="txt" value="13" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="895" />
+          <entry key="PLAIN_TEXT" value="13" />
+          <entry key="Scratch" value="13" />
+        </counts>
+      </usages-collector>
+    </session>
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/HttpServer.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="-851">
               <caret line="29" column="44" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+=======
+            <state relative-caret-position="328">
+              <caret line="63" selection-start-line="63" selection-end-line="63" />
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/main/java/Constants.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="40">
               <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/main/java/StockServiceJDBC.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="666">
+              <caret line="203" column="26" selection-start-line="203" selection-start-column="26" selection-end-line="203" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#8515#8516#0" expanded="true" />
+                <element signature="e#8548#8549#0" expanded="true" />
+              </folding>
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
             </state>
           </provider>
         </entry>
@@ -68,6 +204,7 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/main/java/Test.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="200">
@@ -81,6 +218,12 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="440">
               <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/main/java/Request.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2492">
+              <caret line="207" column="13" selection-start-line="207" selection-start-column="13" selection-end-line="207" selection-end-column="13" />
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
               <folding>
                 <element signature="e#786#787#0" expanded="true" />
                 <element signature="e#833#834#0" expanded="true" />
@@ -89,20 +232,40 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Processor.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/StaticResourceProcessor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+            <state relative-caret-position="245">
+              <caret line="106" selection-start-line="106" selection-end-line="106" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk-11.0.1/lib/src.zip!/java.base/java/util/Base64.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+<<<<<<< HEAD
+              <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+=======
+              <caret line="667" selection-start-line="667" selection-end-line="667" />
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="33">
               <caret line="41" column="71" lean-forward="true" selection-start-line="41" selection-start-column="71" selection-end-line="41" selection-end-column="71" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/main/java/Processor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
             </state>
           </provider>
         </entry>
@@ -110,6 +273,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/UI.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="240">
               <caret line="38" column="14" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="14" />
               <folding>
@@ -119,11 +283,16 @@
                 <element signature="e#19372#19373#0" expanded="true" />
                 <element signature="e#19394#19395#0" expanded="true" />
               </folding>
+=======
+            <state relative-caret-position="255">
+              <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/main/java/StockServiceJDBC.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="200">
@@ -131,25 +300,50 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+=======
+        <entry file="file://$PROJECT_DIR$/src/main/java/Serialization.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="19" column="9" lean-forward="true" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e05c41db-236b-4adc-8387-d20a758bee9f/console.sql">
           <provider selected="true" editor-type-id="text-editor">
             <state>
               <caret column="14" selection-start-column="14" selection-end-column="14" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/main/java/Crypto.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="309">
+              <caret line="44" column="37" selection-start-line="44" selection-start-column="37" selection-end-line="44" selection-end-column="37" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+<<<<<<< HEAD
   <component name="FindInProjectRecents">
     <findStrings>
       <find>autw</find>
     </findStrings>
+=======
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -158,11 +352,25 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/Request.java" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/main/java/StockServiceJDBC.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/Sender.java" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/e05c41db-236b-4adc-8387-d20a758bee9f/console.sql" />
         <option value="$PROJECT_DIR$/src/main/java/UI.java" />
+=======
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/e05c41db-236b-4adc-8387-d20a758bee9f/console.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/Decriptor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Serialization.java" />
+        <option value="$PROJECT_DIR$/src/main/java/HttpServer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Product.java" />
+        <option value="$PROJECT_DIR$/src/main/java/UI.java" />
+        <option value="$PROJECT_DIR$/src/test/java/SenderTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/StockServiceJDBC.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Sender.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Crypto.java" />
+        <option value="$PROJECT_DIR$/src/main/java/StaticResourceProcessor.java" />
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
       </list>
     </option>
   </component>
@@ -206,6 +414,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -231,6 +440,27 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
+<<<<<<< HEAD
+=======
+            <path>
+              <item name="HW2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HW2" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HW2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HW2" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HW2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HW2" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+            </path>
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
           </expand>
           <select />
         </subPane>
@@ -243,13 +473,20 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+<<<<<<< HEAD
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1561310546887" />
+=======
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1561393316997" />
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+<<<<<<< HEAD
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+=======
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -318,29 +555,56 @@
       <option name="presentableId" value="Default" />
       <updated>1561281375279</updated>
       <workItem from="1561281380286" duration="328000" />
+<<<<<<< HEAD
       <workItem from="1561309939040" duration="579000" />
       <workItem from="1561389719793" duration="4503000" />
+=======
+      <workItem from="1561309939040" duration="1590000" />
+      <workItem from="1561381345988" duration="10942000" />
     </task>
+    <task id="LOCAL-00001" summary="samofix lol">
+      <created>1561310616833</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1561310616833</updated>
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="5634000" />
+=======
+    <option name="totallyTimeSpent" value="13084000" />
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
+<<<<<<< HEAD
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2571885" />
+=======
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25746268" />
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Capture Tool" order="6" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3980198" />
+=======
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.20607375" />
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -349,14 +613,24 @@
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.3167028" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32739726" />
       <window_info anchor="bottom" id="Database Console" order="12" weight="0.33465347" />
       <window_info anchor="right" id="Maven" weight="0.3290735" />
+=======
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.3286334" />
+      <window_info anchor="bottom" id="Database Console" order="12" weight="0.329718" />
+      <window_info anchor="right" id="Coverage" sideWeight="0.50136614" side_tool="true" visible="true" weight="0.20309168" />
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
+<<<<<<< HEAD
       <window_info anchor="right" id="Database" order="4" weight="0.4946752" />
+=======
+      <window_info anchor="right" id="Database" order="4" sideWeight="0.4986339" visible="true" weight="0.20309168" />
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
       <window_info anchor="right" id="Palette&#9;" order="5" />
       <window_info anchor="right" id="Maven Projects" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
@@ -366,6 +640,16 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+<<<<<<< HEAD
+=======
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="samofix lol" />
+    <option name="LAST_COMMIT_MESSAGE" value="samofix lol" />
+  </component>
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/StockJDBCService.iml">
       <provider selected="true" editor-type-id="text-editor" />
@@ -378,13 +662,42 @@
       </provider>
     </entry>
     <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits" />
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/ServletProcessor.java">
+=======
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e05c41db-236b-4adc-8387-d20a758bee9f/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="20" selection-start-column="20" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Encriptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="43" lean-forward="true" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Constants.java">
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/Response.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="20">
@@ -396,11 +709,36 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
           <caret line="37" column="17" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
+=======
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.1/lib/src.zip!/java.base/java/util/HashMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1179">
+          <caret line="605" column="13" selection-start-line="605" selection-start-column="13" selection-end-line="605" selection-end-column="13" />
+          <folding>
+            <element signature="e#24218#24219#0" expanded="true" />
+            <element signature="e#24283#24284#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ServletProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Product.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="30" lean-forward="true" selection-start-line="13" selection-end-line="14" />
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Request.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="3720">
           <caret line="246" selection-start-line="212" selection-start-column="4" selection-end-line="246" />
         </state>
@@ -417,19 +755,95 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="14" selection-start-column="14" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StockServiceJDBC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="10" column="46" lean-forward="true" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
+=======
+        <state relative-caret-position="190">
+          <caret line="214" column="51" selection-start-line="214" selection-start-column="51" selection-end-line="214" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/SenderTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="23" column="78" selection-start-line="23" selection-start-column="78" selection-end-line="23" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StoreTableModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Response.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-136">
+          <caret line="21" column="66" selection-start-line="21" selection-start-column="66" selection-end-line="21" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Hash.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Processor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StockServiceJDBC.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="200">
+          <caret line="10" column="46" lean-forward="true" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
+=======
+        <state relative-caret-position="2492">
+          <caret line="207" column="13" selection-start-line="207" selection-start-column="13" selection-end-line="207" selection-end-column="13" />
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/HttpServer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-851">
@@ -469,11 +883,65 @@
             <element signature="e#786#787#0" expanded="true" />
             <element signature="e#833#834#0" expanded="true" />
           </folding>
+=======
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.1/lib/src.zip!/java.base/java/util/Base64.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="667" selection-start-line="667" selection-end-line="667" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StockServiceJDBC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="666">
+          <caret line="203" column="26" selection-start-line="203" selection-start-column="26" selection-end-line="203" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#8515#8516#0" expanded="true" />
+            <element signature="e#8548#8549#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Serialization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="9" lean-forward="true" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="33">
           <caret line="41" column="71" lean-forward="true" selection-start-line="41" selection-start-column="71" selection-end-line="41" selection-end-column="71" />
         </state>
@@ -489,14 +957,39 @@
             <element signature="e#19333#19334#0" expanded="true" />
             <element signature="e#19372#19373#0" expanded="true" />
             <element signature="e#19394#19395#0" expanded="true" />
+=======
+        <state relative-caret-position="255">
+          <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/HttpServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Crypto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="44" column="37" selection-start-line="44" selection-start-column="37" selection-end-line="44" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/StaticResourceProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="280">
           <caret line="119" column="45" lean-forward="true" selection-start-line="119" selection-start-column="10" selection-end-line="119" selection-end-column="45" />
+=======
+        <state relative-caret-position="245">
+          <caret line="106" selection-start-line="106" selection-end-line="106" />
+>>>>>>> fde809870553c99486ea42792b7b88710492ef8c
         </state>
       </provider>
     </entry>

@@ -2,19 +2,31 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class StaticResourceProcessor implements Processor {
 
+  static Crypto cr = new Crypto();
+
   private StockServiceJDBC stockServiceJDBC = new StockServiceJDBC();
   private static HashMap<String, String> tokensUsers = new HashMap();
   private static HashMap<String, String> loginsAndPasswords = new HashMap<>();
+  static byte[] key = "MZygpewJsCpRrfOr".getBytes(StandardCharsets.UTF_8);
 
-  public StaticResourceProcessor() throws SQLException, ClassNotFoundException {
+    public StaticResourceProcessor() throws SQLException, ClassNotFoundException {
     loginsAndPasswords.put("admin", Hash.md5("1234"));
   }
 
@@ -35,7 +47,7 @@ public class StaticResourceProcessor implements Processor {
   }
 
   @Override
-  public void process(Request request, Response response) throws IOException {
+  public void process(Request request, Response response) throws IOException, BadPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, NoSuchPaddingException, InvalidKeyException, ClassNotFoundException, InvalidKeySpecException, InvalidAlgorithmParameterException {
     try {
 
       if(request.getType().equals("GET") && request.getURI().equals("/login")) {
@@ -51,6 +63,8 @@ public class StaticResourceProcessor implements Processor {
         } else if (request.getType().equals("GET") && request.getURI().substring(0, request.getURI().lastIndexOf("/")).equals("/api/good")) {
           if(isNumber(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)))response.sendText(get(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)));
           else response.sendText(getAllTable(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)));
+        } else if(request.getType().equals("GET") && request.getURI().equals("/api/all")) {
+            response.sendText(getAll());
         } else if (request.getType().equals("DELETE") && request.getURI().substring(0, request.getURI().lastIndexOf("/")).equals("/api/good")) {
           response.sendText(delete(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)));
         } else if (request.getType().equals("PUT") && request.getURI().equals("/api/good")) {
@@ -63,7 +77,8 @@ public class StaticResourceProcessor implements Processor {
     }
   }
 
-  public String post(String jsonStr) throws ParseException, SQLException {
+  public String post(String jsonStr) throws ParseException, SQLException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, IOException, ClassNotFoundException, InvalidKeySpecException, InvalidAlgorithmParameterException {
+    jsonStr = (cr.decrypt("345354345", jsonStr));
     JSONParser parser = new JSONParser();
     System.out.println(jsonStr);
     JSONObject jsonObject = null;
@@ -84,11 +99,11 @@ public class StaticResourceProcessor implements Processor {
     return "204 No Content";
   }
 
-  public String put(String jsonStr) throws ParseException {
+  public String put(String jsonStr) throws ParseException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, IOException, ClassNotFoundException, InvalidKeySpecException, InvalidAlgorithmParameterException {
+    jsonStr = (cr.decrypt("345354345", jsonStr));
     JSONParser parser = new JSONParser();
-    System.out.println(jsonStr);
     JSONObject jsonObject = null;
-    jsonObject = (JSONObject) parser.parse(jsonStr.toString());
+    jsonObject = (JSONObject) parser.parse(jsonStr);
     if((long)jsonObject.get("quantity") < 0) return "409 Conflict";
     try {
       stockServiceJDBC.insertProduct((String)jsonObject.get("group"), (String) jsonObject.get("naming"), (String) jsonObject.get("description"), (String) jsonObject.get("manufacturer"), (long) jsonObject.get("price"), (long) jsonObject.get("quantity"));
@@ -119,6 +134,31 @@ public class StaticResourceProcessor implements Processor {
     }
     return "200 Ok " + jsonObject.toString();
   }
+
+    public String getAll() {
+        JSONObject jsonObject = new JSONObject();
+        String allDb = "";
+        ArrayList<String> tables = stockServiceJDBC.getAllTables();
+        for(String table : tables) {
+            try {
+                ResultSet resultSet = stockServiceJDBC.readTable(table);
+                while (resultSet.next()) {
+                    jsonObject = new JSONObject();
+                    jsonObject.put("naming", resultSet.getString("naming"));
+                    jsonObject.put("quantity", resultSet.getString("quantity"));
+                    jsonObject.put("description", resultSet.getString("description"));
+                    jsonObject.put("manufacturer", resultSet.getString("manufacturer"));
+                    jsonObject.put("id", resultSet.getString("id"));
+                    allDb += jsonObject.toString() + "\n";
+                    System.out.println(jsonObject.toString());
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return "404 Not Found";
+            }
+        }
+        return "200 Ok " + "\n" + allDb;
+    }
 /*
   public String getTable(String table) {
     JSONObject jsonObject = new JSONObject();
