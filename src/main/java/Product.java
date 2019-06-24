@@ -1,6 +1,7 @@
 import org.json.simple.JSONObject;
 
 public class Product {
+    private String group;
     private String productName;
     private String description;
     private String producer;
@@ -10,7 +11,7 @@ public class Product {
 
 
 
-    public Product(String productName, String description, String producer, int quantity, int price ){
+    public Product(String group, String productName, String description, String producer, int quantity, int price ){
         this.productName = productName;
         this.description = description;
         this.producer = producer;
@@ -19,7 +20,7 @@ public class Product {
         this.id = 0;
     }
 
-    public Product(int id, String productName, String description, String producer, int quantity, int price ){
+    public Product(String group, int id, String productName, String description, String producer, int quantity, int price ){
         this.id =id;
         this.productName = productName;
         this.description = description;

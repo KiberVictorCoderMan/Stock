@@ -47,7 +47,7 @@ public class UI extends JFrame implements Runnable  {
             //TODO
            product = new ArrayList<>();
             for (int i = 0; i <10; i++) {
-                product.add(new Product(i,"name" + i, "description " + i, "producer" + i,i,i));
+                product.add(new Product("", i,"name" + i, "description " + i, "producer" + i,i,i));
             }
 
             // Інформаційна область
@@ -212,7 +212,7 @@ public class UI extends JFrame implements Runnable  {
                     //   System.out.println(jcb.getSelectedItem());
                     product = new ArrayList<>();
                     for (int i = 0; i <10; i++) {
-                        product.add(new Product(i,"name" +jcb.getSelectedItem()+ i, "description " + i, "producer" + i,i,i));
+                        product.add(new Product("",i,"name" +jcb.getSelectedItem()+ i, "description " + i, "producer" + i,i,i));
                     }
 
                     model = new StoreTableModel(product);

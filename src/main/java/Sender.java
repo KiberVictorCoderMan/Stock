@@ -3,12 +3,15 @@ import org.json.simple.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.CacheRequest;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class Sender {
 
-
+    static Crypto cr = new Crypto();
+//    public Product(String group, String productName, String description, String producer, int quantity, int price ){
     public static void main(String[] args) throws Exception {
         String token;
         JSONObject jsonObject = new JSONObject();
@@ -35,12 +38,11 @@ public class Sender {
         jsonObject2.put("price", 5);
         jsonObject2.put("field", "quantity");
         jsonObject2.put("quantity", "868686868");
-        System.out.println(jsonObject.toString());
         token = aut("http://localhost:8891/login", "admin", "1234");
         doPut("http://localhost:8891/api/good", jsonObject, token);
         doPut("http://localhost:8891/api/good", jsonObject0, token);
         doPost("http://localhost:8891/api/good", jsonObject2, token);
-        doGet("http://localhost:8891/api/good/fruits", token);
+        doGet("http://localhost:8891/api/all", token);
         //doDelete("http://localhost:8891/api/good/8", token);
     }
 
@@ -56,7 +58,7 @@ public class Sender {
             connection.setRequestProperty("Accept", "application/json");
             connection.setRequestProperty("Token", token);
             OutputStreamWriter streamWriter = new OutputStreamWriter(connection.getOutputStream());
-            streamWriter.write(json.toString());
+            streamWriter.write(cr.encrypt("345354345", json.toString()));
             streamWriter.flush();
             StringBuilder stringBuilder = new StringBuilder();
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK){
@@ -96,7 +98,7 @@ public class Sender {
             connection.setRequestProperty("Accept", "application/json");
             connection.setRequestProperty("Token", token);
             OutputStreamWriter streamWriter = new OutputStreamWriter(connection.getOutputStream());
-            streamWriter.write(json.toString());
+            streamWriter.write(cr.encrypt("345354345", json.toString()));
             streamWriter.flush();
             StringBuilder stringBuilder = new StringBuilder();
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK){

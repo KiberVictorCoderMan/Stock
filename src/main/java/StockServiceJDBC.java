@@ -200,4 +200,8 @@ public class StockServiceJDBC {
         connection.close();
     }
 
+    public ArrayList getAllTables(){
+        return tablesList;
+    }
+
 }

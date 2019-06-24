@@ -1,8 +1,15 @@
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -32,7 +39,7 @@ public class HttpServer {
         server.await();
     }
 
-    public void handleRequest(Socket connection) throws SQLException, ClassNotFoundException {
+    public void handleRequest(Socket connection) throws SQLException, ClassNotFoundException, IllegalBlockSizeException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, InvalidKeySpecException, InvalidAlgorithmParameterException {
     	try (
     		InputStream input = connection.getInputStream();
     		OutputStream output = connection.getOutputStream();   			
@@ -80,9 +87,19 @@ public class HttpServer {
             		public void run() {
                         try {
                             handleRequest(connection);
-                        } catch (SQLException e) {
+                        } catch (SQLException | InvalidKeySpecException | InvalidAlgorithmParameterException e) {
                             e.printStackTrace();
                         } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        } catch (NoSuchAlgorithmException e) {
+                            e.printStackTrace();
+                        } catch (InvalidKeyException e) {
+                            e.printStackTrace();
+                        } catch (NoSuchPaddingException e) {
+                            e.printStackTrace();
+                        } catch (BadPaddingException e) {
+                            e.printStackTrace();
+                        } catch (IllegalBlockSizeException e) {
                             e.printStackTrace();
                         }
                     }
