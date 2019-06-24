@@ -64,9 +64,13 @@ public class StaticResourceProcessor implements Processor {
           if(isNumber(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)))response.sendText(get(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)));
           else response.sendText(getAllTable(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)));
         } else if(request.getType().equals("GET") && request.getURI().equals("/api/all")) {
-            response.sendText(getAll());
-        } else if (request.getType().equals("DELETE") && request.getURI().substring(0, request.getURI().lastIndexOf("/")).equals("/api/good")) {
-          response.sendText(delete(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)));
+          response.sendText(getAll());
+        } else if(request.getType().equals("GET") && request.getURI().equals("/api/tables")) {
+          response.sendText(getAllTables());
+        }else if (request.getType().equals("DELETE") && request.getURI().substring(0, request.getURI().lastIndexOf("/")).equals("/api/good")) {
+          String id = request.getURI().substring(request.getURI().lastIndexOf("/") + 1, request.getURI().indexOf("_"));
+          String group = request.getURI().substring(request.getURI().indexOf("_") + 1);
+          response.sendText(delete(group, id));
         } else if (request.getType().equals("PUT") && request.getURI().equals("/api/good")) {
           response.sendText(put(request.getBody()));
         }
@@ -184,6 +188,16 @@ public class StaticResourceProcessor implements Processor {
     return "200 Ok " + jsonObject.toString();
   }*/
 
+  public String getAllTables() {
+    String allTb = "";
+    ArrayList<String> tables = stockServiceJDBC.getAllTables();
+    for(String table : tables) {
+      allTb += table + "\n";
+    }
+    System.out.println("200 Ok");
+    return allTb;
+  }
+
   public String getAllTable(String table) {
     JSONObject jsonObject = new JSONObject();
     String allDb = "";
@@ -197,14 +211,13 @@ public class StaticResourceProcessor implements Processor {
         jsonObject.put("manufacturer", resultSet.getString("manufacturer"));
         jsonObject.put("id", resultSet.getString("id"));
         jsonObject.put("price", resultSet.getString("price"));
-
         allDb += jsonObject.toString() + "\n";
         System.out.println(jsonObject.toString());
       }
     } catch (SQLException e) {
       return "404 Not Found";
     }
-    System.out.println("200 Ok");
+    System.out.println( "200 Ok ");
     return allDb;
   }
 
@@ -221,9 +234,9 @@ public class StaticResourceProcessor implements Processor {
     return "401 Unauthorized";
   }
 
-  public String delete(String id) throws SQLException {
+  public String delete(String table, String id) throws SQLException {
     try{
-      stockServiceJDBC.delete(Integer.parseInt(id));
+      stockServiceJDBC.deleteProductId(table, Integer.parseInt(id));
     } catch (NullPointerException e) {
       return "404 Not Found";
     }

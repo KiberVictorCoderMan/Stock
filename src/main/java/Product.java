@@ -79,9 +79,9 @@ public class Product {
     public JSONObject getJSON(){
         JSONObject obj = new JSONObject();
         obj.put("id", getId());
-        obj.put("product_name",getProductName());
+        obj.put("naming",getProductName());
         obj.put("description",getDescription());
-        obj.put("producer",getProducer());
+        obj.put("manufacturer",getProducer());
         obj.put("quantity", getQuantity());
         obj.put("price", getPrice());
 

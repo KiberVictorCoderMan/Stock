@@ -28,12 +28,12 @@ public class Sender {
         //doPut("http://localhost:8891/api/good", jsonObject, token);
         //doPut("http://localhost:8891/api/good", jsonObject0, token);
        // doPost("http://localhost:8891/api/good", jsonObject2, token);
-
+        //doGet("http://localhost:8891/api/tables", token);
          doGet("http://localhost:8891/api/good/fruits", token);
         //doGet("http://localhost:8891/api/good/fruits/1", token);
-
-        // doGet("http://localhost:8891/api/all", token);
-        //doDelete("http://localhost:8891/api/good/8", token);
+        //doGet("http://localhost:8891/api/tables", token);
+         doGet("http://localhost:8891/api/all", token);
+        //doDelete("http://localhost:8891/api/good/1_fruits", token);
     }
 
     public static String doPost(String urlpath, JSONObject json, String token) {

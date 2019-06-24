@@ -16,6 +16,8 @@ public class UI extends JFrame implements Runnable  {
     private JPanel mainMenu;
     private  Font f2 = new Font("Arial", Font.BOLD, 20);
     private  Font f1 = new Font("Monaco", Font.BOLD, 16);
+    private static  String token = Sender.aut("http://localhost:8891/login", "admin", "1234");;
+
     private static  GridBagConstraints c;
     private static  ArrayList<Product> product;
     private static JScrollPane scrollPane;
@@ -28,19 +30,15 @@ public class UI extends JFrame implements Runnable  {
 
     private static JTable table;
     private static TableModel model;
-    private static  String token;
 
     private void init() {
             setSize(900, 600);
             setLocation(300, 300);
             setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             setTitle("Manager of storage");
-            token = Sender.aut("http://localhost:8891/login", "admin", "1234");
-
 
             try {
                 mainMenuFrame();
-
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (UnsupportedLookAndFeelException e) {
@@ -50,7 +48,7 @@ public class UI extends JFrame implements Runnable  {
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-             // autentificationFrame();
+            autentificationFrame();
 
         }
 
@@ -79,7 +77,20 @@ public class UI extends JFrame implements Runnable  {
 
 
             // create checkbox
-            jcb = new JComboBox(new String[] { "group1", "group2", "group3", "group4", "group5" });
+            String tables= null;
+            try {
+                tables = Sender.doGet("http://localhost:8891/api/tables", token);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String[] tab = tables.split("\n");
+            ArrayList<String> tm = new ArrayList<>();
+            tm.add("all");
+            for(String t:tab)
+                tm.add(t);
+
+            jcb = new JComboBox(tm.toArray());
+
             c.fill = GridBagConstraints.BOTH;
             c.weightx = 0.2;
             c.gridwidth = 1;
@@ -222,14 +233,31 @@ public class UI extends JFrame implements Runnable  {
                 b8.setVisible(false);
                 //TODO mfc table
                 if (itemEvent.getSource() == jcb) {
-                    //   System.out.println(jcb.getSelectedItem());
-                    product = new ArrayList<>();
-                    for (int i = 0; i <10; i++) {
-                        product.add(new Product(i,"name" +jcb.getSelectedItem()+ i, "description " + i, "producer" + i,i,i));
+                        String tmp1 = null;
+                        String url;
+                    try {
+                        if(!jcb.getSelectedItem().equals("all")){
+
+                            tmp1 = Sender.doGet("http://localhost:8891/api/good/"+ jcb.getSelectedItem(), token);
+                        }else{
+                            tmp1 = Sender.doGet("http://localhost:8891/api/"+ jcb.getSelectedItem(), token);
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
+                    //System.out.println("str "+tmp1);
+
+
+//                    //   System.out.println(jcb.getSelectedItem());
+//                    product = new ArrayList<>();
+//                    for (int i = 0; i <10; i++) {
+//                        product.add(new Product(i,"name" +jcb.getSelectedItem()+ i, "description " + i, "producer" + i,i,i));
+//                    }
+
 
                     mainMenu.remove(scrollPane);
-                    updateJtable(product);
+                    updateJtable(parser(tmp1));
 
                 }
 
@@ -472,16 +500,19 @@ private  void groupFrame(boolean change) {
                 if( newGroupName0.getText().equals("admin")&&newGroupName1.getText().equals("1234")) {
                     token = Sender.aut("http://localhost:8891/login", newGroupName0.getText(), newGroupName1.getText());
                     JOptionPane pane = new JOptionPane();
-                    JOptionPane.showMessageDialog(mainMenu, "You successfully entered",
+                    JOptionPane.showMessageDialog(null, "You successfully entered",
                             "Message",
                             JOptionPane.INFORMATION_MESSAGE);
-                    setContentPane(mainMenu);
+                   setContentPane(mainMenu);
+
                     System.out.println("token: "+token);
                 }else throw new Exception();
             } catch (Exception e1) {
                 new JOptionPane();
-                JOptionPane.showMessageDialog(mainMenu, "Password or login is incorrect",
+                JOptionPane.showMessageDialog(null, "Password or login is incorrect",
                         "Error", JOptionPane.WARNING_MESSAGE);
+                newGroupName0.setText("");
+                newGroupName1.setText("");
             }
         });
 
