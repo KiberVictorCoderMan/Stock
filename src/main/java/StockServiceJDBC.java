@@ -110,6 +110,11 @@ public class StockServiceJDBC {
         statement.executeUpdate(SQL);
     }
 
+    public void deleteProductId(String groupName, int id) throws SQLException {
+        String SQL = "DELETE FROM " + groupName + " WHERE id = '" + id + "'";
+        statement.executeUpdate(SQL);
+    }
+
     public void dropTable(String groupName) throws SQLException {
         String SQL = "DROP TABLE IF EXISTS "+groupName;
         statement.executeUpdate(SQL);
