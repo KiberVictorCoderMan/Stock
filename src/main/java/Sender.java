@@ -13,17 +13,17 @@ public class Sender {
         String token;
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("group", "fruits");
-        jsonObject.put("description", "0");
+        jsonObject.put("description", "descrr");
         jsonObject.put("manufacturer", "7");
-        jsonObject.put("naming", "1234");
+        jsonObject.put("naming", "item1");
         jsonObject.put("price", 5);
         jsonObject.put("quantity", 1234);
 
         JSONObject jsonObject0 = new JSONObject();
         jsonObject0.put("group", "fruits");
-        jsonObject0.put("description", "6");
+        jsonObject0.put("description", "description2");
         jsonObject0.put("manufacturer", "4");
-        jsonObject0.put("naming", "777777");
+        jsonObject0.put("naming", "item2");
         jsonObject0.put("price", 5);
         jsonObject0.put("quantity", 1234);
 
@@ -34,13 +34,15 @@ public class Sender {
         jsonObject2.put("id", 2);
         jsonObject2.put("price", 5);
         jsonObject2.put("field", "quantity");
-        jsonObject2.put("quantity", "868686868");
+        jsonObject2.put("quantity", "86868");
         System.out.println(jsonObject.toString());
         token = aut("http://localhost:8891/login", "admin", "1234");
-        doPut("http://localhost:8891/api/good", jsonObject, token);
-        doPut("http://localhost:8891/api/good", jsonObject0, token);
-        doPost("http://localhost:8891/api/good", jsonObject2, token);
+        //doPut("http://localhost:8891/api/good", jsonObject, token);
+        //doPut("http://localhost:8891/api/good", jsonObject0, token);
+       // doPost("http://localhost:8891/api/good", jsonObject2, token);
+
         doGet("http://localhost:8891/api/good/fruits", token);
+        //doGet("http://localhost:8891/api/good/fruits/1", token);
         //doDelete("http://localhost:8891/api/good/8", token);
     }
 

@@ -16,7 +16,7 @@ public class UI extends JFrame implements Runnable  {
     private static JComboBox jcb;
     private static JTable table;
     private static TableModel model;
-
+    private static  String token;
 
     private void init() {
             setSize(900, 600);
@@ -25,6 +25,7 @@ public class UI extends JFrame implements Runnable  {
             setTitle("Manager of storage");
             try {
                 mainMenuFrame();
+
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (UnsupportedLookAndFeelException e) {
@@ -34,6 +35,8 @@ public class UI extends JFrame implements Runnable  {
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
+             // autentificationFrame();
+              token = Sender.aut("http://localhost:8891/login", "admin", "1234");
         }
 
 
@@ -215,8 +218,8 @@ public class UI extends JFrame implements Runnable  {
                         product.add(new Product(i,"name" +jcb.getSelectedItem()+ i, "description " + i, "producer" + i,i,i));
                     }
 
-                    model = new StoreTableModel(product);
-                    table = new JTable(model);
+//                    model = new StoreTableModel(product);
+//                    table = new JTable(model);
                 }
                 
                 revalidate();
@@ -404,6 +407,90 @@ private  void groupFrame(boolean change) {
         repaint();
     }
 
+
+    private void autentificationFrame() {
+        JPanel paneOne = new JPanel(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        JLabel login = new JLabel("Login");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 0.1;
+        c.ipady = 20;
+        paneOne.add(login, c);
+        login.setFont(f1);
+
+        // Поле для введення назви нових груп.
+        final JTextField newGroupName0 = new JTextField();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 1;
+        c.gridy = 0;
+        c.weightx = 0.6;
+        c.ipady = 20;
+        paneOne.add(newGroupName0, c);
+        newGroupName0.setFont(f1);
+
+        JLabel pass = new JLabel("Password");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.weightx = 0.1;
+        c.ipady = 20;
+        paneOne.add(pass , c);
+        pass.setFont(f1);
+
+        // Поле для введення назви нових груп.
+        final JTextField newGroupName1 = new JTextField();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 1;
+        c.gridy = 1;
+        c.weightx = 0.6;
+        c.ipady = 20;
+        paneOne.add(newGroupName1, c);
+        newGroupName1.setFont(f1);
+
+
+        // запускає метод зміни.
+        JButton b = new JButton("Enter");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 1;
+        c.gridy = 2;
+        c.gridx = 0;
+        c.weightx = 0.3;
+        c.gridwidth = 2;
+        c.ipady = 20;
+
+        //TODO autentification
+        b.addActionListener(e -> {
+            try{
+                System.out.println("log "+newGroupName0.getText());
+                System.out.println("pass " +newGroupName1.getText());
+                if( newGroupName0.getText().equals("admin")&&newGroupName1.getText().equals("1234")) {
+                    token = Sender.aut("http://localhost:8891/login", newGroupName0.getText(), newGroupName1.getText());
+                    JOptionPane pane = new JOptionPane();
+                    JOptionPane.showMessageDialog(mainMenu, "You successfully entered",
+                            "Message",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    setContentPane(mainMenu);
+                    System.out.println("token: "+token);
+                }else throw new Exception();
+            } catch (Exception e1) {
+                new JOptionPane();
+                JOptionPane.showMessageDialog(mainMenu, "Password or login is incorrect",
+                        "Error", JOptionPane.WARNING_MESSAGE);
+            }
+        });
+
+        paneOne.add(b, c);
+        b.setFont(f1);
+
+        setContentPane(paneOne);
+        revalidate();
+        repaint();
+    }
+
+
     private void addItemFrame(JTable table) {
         JPanel paneOne = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -535,6 +622,8 @@ private  void groupFrame(boolean change) {
                 "Error", JOptionPane.WARNING_MESSAGE);
         }
     }
+
+
 
 
 

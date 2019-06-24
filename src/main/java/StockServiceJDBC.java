@@ -3,11 +3,12 @@ import java.util.ArrayList;
 
 public class StockServiceJDBC {
     //static final String DATABASE_URL = "jdbc:mysql://localhost:3306/stock?autoReconnect=true&useSSL=false";\\
-    static final String DATABASE_URL = "jdbc:mysql://localhost:3306/stock";
+    static final String DATABASE_URL = "jdbc:mysql://localhost:3306/stock?autoReconnect=true&useSSL=false";
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 
     static final String USER = "root";
-    static final String PASSWORD = "root";
+    //root
+    static final String PASSWORD = "Mike2000";
 
     ArrayList<String> tablesList = new ArrayList<>();
 
@@ -199,5 +200,7 @@ public class StockServiceJDBC {
         statement.close();
         connection.close();
     }
+
+
 
 }
