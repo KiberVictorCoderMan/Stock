@@ -1,4 +1,9 @@
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -13,7 +18,14 @@ public class UI extends JFrame implements Runnable  {
     private  Font f1 = new Font("Monaco", Font.BOLD, 16);
     private static  GridBagConstraints c;
     private static  ArrayList<Product> product;
+    private static JScrollPane scrollPane;
     private static JComboBox jcb;
+
+    private static  JButton b5;
+    private static  JButton b6;
+    private static  JButton b7;
+    private static  JButton b8;
+
     private static JTable table;
     private static TableModel model;
     private static  String token;
@@ -23,6 +35,9 @@ public class UI extends JFrame implements Runnable  {
             setLocation(300, 300);
             setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             setTitle("Manager of storage");
+            token = Sender.aut("http://localhost:8891/login", "admin", "1234");
+
+
             try {
                 mainMenuFrame();
 
@@ -36,7 +51,7 @@ public class UI extends JFrame implements Runnable  {
                 e.printStackTrace();
             }
              // autentificationFrame();
-              token = Sender.aut("http://localhost:8891/login", "admin", "1234");
+
         }
 
 
@@ -47,25 +62,20 @@ public class UI extends JFrame implements Runnable  {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
 
-            //TODO
-           product = new ArrayList<>();
-            for (int i = 0; i <10; i++) {
-                product.add(new Product("", i,"name" + i, "description " + i, "producer" + i,i,i));
+            //TODO show all
+            String tmp = null;
+            try {
+               // tmp = Sender.doGet("http://localhost:8891/api/good/fruits", token);
+                tmp = Sender.doGet("http://localhost:8891/api/all", token);
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+            System.out.println("str "+tmp);
+
 
             // Інформаційна область
-            model = new StoreTableModel(product);
-            table = new JTable(model);
-
-
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridy = 1;
-            c.gridx = 0;
-            c.gridwidth = 10;
-            c.ipady = 350;
-            JScrollPane scrollPane = new JScrollPane(table);
-            mainMenu.add(scrollPane, c);
-            table.setFont(f1);
+           updateJtable(parser(tmp));
 
 
             // create checkbox
@@ -141,7 +151,7 @@ public class UI extends JFrame implements Runnable  {
             b0.setFont(f1);
 
 
-            JButton b5 = new JButton("Add item");
+            b5 = new JButton("Add item");
             c.fill = GridBagConstraints.HORIZONTAL;
             c.weightx = 0.2;
             c.gridwidth = 1;
@@ -155,7 +165,7 @@ public class UI extends JFrame implements Runnable  {
             b5.setFont(f1);
             b5.setVisible(false);
 
-            JButton b6 = new JButton("Edit item");
+            b6 = new JButton("Edit item");
             c.fill = GridBagConstraints.HORIZONTAL;
             c.weightx = 0.2;
             c.gridwidth = 1;
@@ -170,7 +180,7 @@ public class UI extends JFrame implements Runnable  {
             b6.setVisible(false);
 
 
-            JButton b7 = new JButton("Delete item");
+            b7 = new JButton("Delete item");
             c.fill = GridBagConstraints.HORIZONTAL;
             c.weightx = 0.2;
             c.gridwidth = 1;
@@ -192,7 +202,7 @@ public class UI extends JFrame implements Runnable  {
 
 
 
-            JButton b8= new JButton("Increase/Decrease quantity");
+            b8= new JButton("Increase/Decrease quantity");
             c.fill = GridBagConstraints.HORIZONTAL;
             c.weightx = 0.2;
             c.gridwidth = 2;
@@ -215,13 +225,14 @@ public class UI extends JFrame implements Runnable  {
                     //   System.out.println(jcb.getSelectedItem());
                     product = new ArrayList<>();
                     for (int i = 0; i <10; i++) {
-                        product.add(new Product("",i,"name" +jcb.getSelectedItem()+ i, "description " + i, "producer" + i,i,i));
+                        product.add(new Product(i,"name" +jcb.getSelectedItem()+ i, "description " + i, "producer" + i,i,i));
                     }
 
-//                    model = new StoreTableModel(product);
-//                    table = new JTable(model);
+                    mainMenu.remove(scrollPane);
+                    updateJtable(product);
+
                 }
-                
+
                 revalidate();
                 repaint();
 
@@ -229,14 +240,6 @@ public class UI extends JFrame implements Runnable  {
 
 
 
-            table.getSelectionModel().addListSelectionListener(event -> {
-                b5.setVisible(true);
-                b6.setVisible(true);
-                b7.setVisible(true);
-                b8.setVisible(true);
-
-                //System.out.println(table.getValueAt(table.getSelectedRow(), 0).toString());
-            });
 
 
             setContentPane(mainMenu);
@@ -610,6 +613,28 @@ private  void groupFrame(boolean change) {
         repaint();
     }
 
+
+    private void updateJtable(ArrayList<Product> product){
+        model = new StoreTableModel(product);
+        table = new JTable(model);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridy = 1;
+        c.gridx = 0;
+        c.gridwidth = 10;
+        c.ipady = 350;
+        scrollPane = new JScrollPane(table);
+        mainMenu.add(scrollPane, c);
+        table.setFont(f1);
+
+        table.getSelectionModel().addListSelectionListener(e -> {
+            b5.setVisible(true);
+            b6.setVisible(true);
+            b7.setVisible(true);
+            b8.setVisible(true);
+            //System.out.println(table.getValueAt(table.getSelectedRow(), 0).toString());
+        });
+    }
+
     private void optionFrame(String message, String err_message){
         try{
         JOptionPane pane = new JOptionPane();
@@ -623,6 +648,23 @@ private  void groupFrame(boolean change) {
         }
     }
 
+
+    private ArrayList<Product> parser(String s){
+        String[] strArr = s.split("\n");
+        product = new ArrayList<>();
+        JSONParser parser = new JSONParser();
+        for (int i = 0; i <strArr.length; i++) {
+            JSONObject json=null;
+            try {
+                json = (JSONObject) parser.parse(strArr[i]);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            product.add(new Product(json));
+        }
+        return product;
+    }
 
 
 

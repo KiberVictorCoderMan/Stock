@@ -128,11 +128,14 @@ public class StaticResourceProcessor implements Processor {
       jsonObject.put("description", resultSet.getString("description"));
       jsonObject.put("manufacturer", resultSet.getString("manufacturer"));
       jsonObject.put("id", resultSet.getString("id"));
+      jsonObject.put("price", resultSet.getString("price"));
+
     } catch (Exception e) {
       e.printStackTrace();
       return "404 Not Found";
     }
-    return "200 Ok " + jsonObject.toString();
+    System.out.println("200 Ok ");
+    return  jsonObject.toString();
   }
 
     public String getAll() {
@@ -149,7 +152,9 @@ public class StaticResourceProcessor implements Processor {
                     jsonObject.put("description", resultSet.getString("description"));
                     jsonObject.put("manufacturer", resultSet.getString("manufacturer"));
                     jsonObject.put("id", resultSet.getString("id"));
-                    allDb += jsonObject.toString() + "\n";
+                  jsonObject.put("price", resultSet.getString("price"));
+
+                  allDb += jsonObject.toString() + "\n";
                     System.out.println(jsonObject.toString());
                 }
             } catch (SQLException e) {
@@ -157,7 +162,8 @@ public class StaticResourceProcessor implements Processor {
                 return "404 Not Found";
             }
         }
-        return "200 Ok " + "\n" + allDb;
+       System.out.println("200 Ok ");
+        return allDb;
     }
 /*
   public String getTable(String table) {
@@ -190,13 +196,16 @@ public class StaticResourceProcessor implements Processor {
         jsonObject.put("description", resultSet.getString("description"));
         jsonObject.put("manufacturer", resultSet.getString("manufacturer"));
         jsonObject.put("id", resultSet.getString("id"));
+        jsonObject.put("price", resultSet.getString("price"));
+
         allDb += jsonObject.toString() + "\n";
         System.out.println(jsonObject.toString());
       }
     } catch (SQLException e) {
       return "404 Not Found";
     }
-    return "200 Ok " + "\n" + allDb;
+    System.out.println("200 Ok");
+    return allDb;
   }
 
   public String login(String login, String password) {

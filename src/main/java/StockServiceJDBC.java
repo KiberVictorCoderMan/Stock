@@ -201,12 +201,31 @@ public class StockServiceJDBC {
         connection.close();
     }
 
-<<<<<<< HEAD
 
-=======
     public ArrayList getAllTables(){
         return tablesList;
     }
->>>>>>> fde809870553c99486ea42792b7b88710492ef8c
+
+    public static void main(String[] args) {
+        try {
+            StockServiceJDBC db = new StockServiceJDBC();
+            db.createTable("vegetables");
+            db.insertProduct("vegetables","item1","some descriptiomn","me",12,3);
+            db.insertProduct("vegetables","item two","some description","not me",100,12);
+            db.insertProduct("vegetables","item3","description","kkk inc.",33,3);
+            db.insertProduct("vegetables","item 4","description4","nz ind.",41,145);
+            db.insertProduct("vegetables","item 5","description 5","coin",50,1);
+
+            db.insertProduct("fruits","item 3","description","kkk inc.",27,87);
+            db.insertProduct("fruits","product 3","desc","i am",1324,40);
+            db.insertProduct("fruits","item 5","some text","he",55,2);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 }
