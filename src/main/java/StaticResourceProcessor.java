@@ -102,38 +102,88 @@ public class StaticResourceProcessor implements Processor {
   }
 
   public String post(String jsonStr) throws ParseException, SQLException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, IOException, ClassNotFoundException, InvalidKeySpecException, InvalidAlgorithmParameterException {
-    jsonStr = (cr.decrypt("345354345", jsonStr));
-    JSONParser parser = new JSONParser();
-    System.out.println(jsonStr);
-    JSONObject jsonObject = null;
-    try {
-      jsonObject = (JSONObject) parser.parse(jsonStr.toString());
-    } catch (Exception e) {
-      jsonObject = (JSONObject) parser.parse(jsonStr.toString());
+        jsonStr = (cr.decrypt("345354345", jsonStr));
+        JSONParser parser = new JSONParser();
+        System.out.println(jsonStr);
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = (JSONObject) parser.parse(jsonStr.toString());
+        } catch (Exception e) {
+            jsonObject = (JSONObject) parser.parse(jsonStr.toString());
+        }
+        if(get(String.valueOf(jsonObject.get("id"))).equals("404 Not Found")) return "404 Not Found";
+        try {
+            //    public void updateItem(String tableName, int index, String column, String value){
+            String coll = (String)jsonObject.get("field");
+            if(jsonObject.keySet().contains("id")) {
+              try {
+                stockServiceJDBC.updateItem(
+                        (String) jsonObject.get("group"),
+                        (long) jsonObject.get("id"),
+                        coll,
+                        (String) jsonObject.get(coll));
+              } catch (java.lang.ClassCastException e) {
+                stockServiceJDBC.updateItem(
+                        (String) jsonObject.get("group"),
+                        (long) jsonObject.get("id"),
+                        coll,
+                        (long) jsonObject.get(coll));
+              }
+            } else {
+              try {
+                stockServiceJDBC.updateItemName(
+                        (String) jsonObject.get("group"),
+                        (String) jsonObject.get("name"),
+                        coll,
+                        (String) jsonObject.get(coll));
+              } catch (java.lang.ClassCastException e) {
+                stockServiceJDBC.updateItemName(
+                        (String) jsonObject.get("group"),
+                        (String) jsonObject.get("name"),
+                        coll,
+                        (long) jsonObject.get(coll));
+              }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "409 Conflict";
+        }
+        return "204 No Content";
     }
-    if(get(String.valueOf(jsonObject.get("id"))).equals("404 Not Found")) return "404 Not Found";
-    try {
-      //    public void updateItem(String tableName, int index, String column, String value){
-      String coll = (String)jsonObject.get("field");
-      try {
-        stockServiceJDBC.updateItem(
-                (String) jsonObject.get("group"),
-                (long) jsonObject.get("id"),
-                coll,
-                (String) jsonObject.get(coll));
-      }catch (java.lang.ClassCastException e) {
-        stockServiceJDBC.updateItem(
-                (String) jsonObject.get("group"),
-                (long) jsonObject.get("id"),
-                coll,
-                (long) jsonObject.get(coll));
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-      return "409 Conflict";
+
+    public String postName(String jsonStr) throws ParseException, SQLException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, IOException, ClassNotFoundException, InvalidKeySpecException, InvalidAlgorithmParameterException {
+        jsonStr = (cr.decrypt("345354345", jsonStr));
+        JSONParser parser = new JSONParser();
+        System.out.println(jsonStr);
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = (JSONObject) parser.parse(jsonStr.toString());
+        } catch (Exception e) {
+            jsonObject = (JSONObject) parser.parse(jsonStr.toString());
+        }
+        if(get(String.valueOf(jsonObject.get("id"))).equals("404 Not Found")) return "404 Not Found";
+        try {
+            //    public void updateItem(String tableName, int index, String column, String value){
+            String coll = (String)jsonObject.get("field");
+            try {
+                stockServiceJDBC.updateItemName(
+                        (String) jsonObject.get("group"),
+                        (String)jsonObject.get("name"),
+                        coll,
+                        (String) jsonObject.get(coll));
+            }catch (java.lang.ClassCastException e) {
+                stockServiceJDBC.updateItemName(
+                        (String) jsonObject.get("group"),
+                        (String)jsonObject.get("name"),
+                        coll,
+                        (long) jsonObject.get(coll));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "409 Conflict";
+        }
+        return "204 No Content";
     }
-    return "204 No Content";
-  }
 
   public String postTable(String jsonStr) throws ParseException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, IOException, ClassNotFoundException, InvalidKeySpecException, InvalidAlgorithmParameterException {
     jsonStr = (cr.decrypt("345354345", jsonStr));

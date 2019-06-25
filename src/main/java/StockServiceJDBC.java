@@ -100,6 +100,24 @@ public class StockServiceJDBC {
         }
     }
 
+    public void updateItemName(String tableName, String naming, String column, String value){
+        try{
+            statement.executeUpdate("UPDATE "+tableName+" SET "+column+" = "+
+                    "'"+value+"'"+" WHERE naming = " + naming);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateItemName(String tableName, String naming, String column, long value){
+        try{
+            statement.executeUpdate("UPDATE "+tableName+" SET "+column+" = "+
+                    "'"+value+"'"+" WHERE naming = " + naming);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 /*
     public void insertProduct(String groupName, String product, String description, String manufacturer, long priceProduct,  long newNumberOfProduct) throws SQLException {
         String SQL = "INSERT INTO " + groupName + " VALUES ('" + product + "', '" + description + "', '" + manufacturer + "', " + priceProduct + ", " + newNumberOfProduct + ", " + idGen +  ")";
