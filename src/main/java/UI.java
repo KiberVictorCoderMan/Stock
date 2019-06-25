@@ -3,10 +3,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -17,11 +17,13 @@ public class UI extends JFrame implements Runnable  {
     private  Font f2 = new Font("Arial", Font.BOLD, 20);
     private  Font f1 = new Font("Monaco", Font.BOLD, 16);
     private static  String token = Sender.aut("http://localhost:8891/login", "admin", "1234");
+    private final JTextField jtfFilter = new JTextField();
 
     private static  GridBagConstraints c;
     private static  ArrayList<Product> product;
     private static JScrollPane scrollPane;
     private static JComboBox jcb;
+    private static  JLabel total;
 
     private static  JButton b5;
     private static  JButton b6;
@@ -60,10 +62,20 @@ public class UI extends JFrame implements Runnable  {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
 
+        total= new JLabel();
+        total.setHorizontalAlignment(JLabel.CENTER);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.2;
+        c.gridwidth = 2;
+        c.gridy = 4;
+        c.gridx = 3;
+        c.ipady = 15;
+        mainMenu.add(total, c);
+        total.setFont(f1);
+
         //TODO show all
         String tmp = null;
         try {
-            // tmp = Sender.doGet("http://localhost:8891/api/good/fruits", token);
             tmp = Sender.doGet("http://localhost:8891/api/all", token);
 
         } catch (Exception e) {
@@ -73,36 +85,10 @@ public class UI extends JFrame implements Runnable  {
 
 
         // Інформаційна область
-        System.out.println("tmp" +tmp);
         updateJtable(parser(tmp));
 
-
         // create checkbox
-        String tables= null;
-        try {
-            tables = Sender.doGet("http://localhost:8891/api/tables", token);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        String[] tab = tables.split("\n");
-        ArrayList<String> tm = new ArrayList<>();
-        tm.add("all");
-        for(String t:tab)
-            tm.add(t);
-
-        jcb = new JComboBox(tm.toArray());
-
-        c.fill = GridBagConstraints.BOTH;
-        c.weightx = 0.2;
-        c.gridwidth = 1;
-        c.gridy = 0;
-        c.gridx = 0;
-        c.ipady = 20;
-
-
-        mainMenu.add(jcb, c);
-        jcb.setFont(f1);
-
+        updateGroups();
 
 
         JButton b1 = new JButton("Add group");
@@ -140,9 +126,14 @@ public class UI extends JFrame implements Runnable  {
         c.ipady = 20;
         b3.addActionListener(e ->{
             JOptionPane paneOne = new JOptionPane();
+
             int response = JOptionPane.showConfirmDialog(mainMenu, "Do you want to delete group?","Message",JOptionPane.YES_NO_OPTION);
             if(	response  == JOptionPane.YES_OPTION) {
-                //TODO
+                Sender.doDelete("http://localhost:8891/api/table/"+jcb.getSelectedItem(), token);
+                mainMenu.remove(jcb);
+                updateGroups();
+                getAndUpdateTable();
+
                 JOptionPane.showMessageDialog(paneOne, "Group deleted!",
                         "Message", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -203,7 +194,11 @@ public class UI extends JFrame implements Runnable  {
             JOptionPane paneOne = new JOptionPane();
             int response = JOptionPane.showConfirmDialog(mainMenu, "Do you want to delete item?","Message",JOptionPane.YES_NO_OPTION);
             if(	response  == JOptionPane.YES_OPTION) {
-                Sender.doDelete("http://localhost:8891/api/good/"+jcb.getSelectedItem()+"/"+table.getValueAt(table.getSelectedRow(), 0).toString(), token);
+                //TODO delete
+                if(!jcb.getSelectedItem().equals("all"))
+                    Sender.doDelete("http://localhost:8891/api/good/"+jcb.getSelectedItem()+"/"+table.getValueAt(table.getSelectedRow(), 0).toString(), token);
+//                else
+//                    Sender.doDelete("http://localhost:8891/api/good/"+jcb.getSelectedItem()+"/"+table.getValueAt(table.getSelectedRow(), 0).toString(), token);
                 getAndUpdateTable();
                 JOptionPane.showMessageDialog(paneOne, "Item deleted!",
                         "Message", JOptionPane.INFORMATION_MESSAGE);
@@ -228,23 +223,26 @@ public class UI extends JFrame implements Runnable  {
         b8.setFont(f1);
         b8.setVisible(false);
 
-
-        jcb.addItemListener(itemEvent -> {
-            b5.setVisible(false);
-            b6.setVisible(false);
-            b7.setVisible(false);
-            b8.setVisible(false);
-            if (itemEvent.getSource() == jcb) {
-                getAndUpdateTable();
-            }
-            revalidate();
-            repaint();
-
-        });
+        JLabel search = new JLabel("Search:");
+        search.setHorizontalAlignment(JLabel.CENTER);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.2;
+        c.gridwidth = 1;
+        c.gridy = 4;
+        c.gridx = 0;
+        c.ipady = 15;
+        mainMenu.add(search, c);
+        search.setFont(f1);
 
 
-
-
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.2;
+        c.gridwidth = 2;
+        c.gridy = 4;
+        c.gridx = 1;
+        c.ipady = 15;
+        mainMenu.add(jtfFilter, c);
+        jtfFilter.setFont(f1);
 
         setContentPane(mainMenu);
         setVisible(true);
@@ -256,10 +254,33 @@ public class UI extends JFrame implements Runnable  {
         JPanel paneOne = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
+        String tables= null;
+        try {
+            tables = Sender.doGet("http://localhost:8891/api/tables", token);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String[] tab = tables.split("\n");
+        final JComboBox  cb = new JComboBox(tab);
+
+        if(jcb.getSelectedItem().equals("all")&&change){
+            // create checkbox
+            c.fill = GridBagConstraints.HORIZONTAL;
+            c.weightx = 1;
+            c.gridy = 0;
+            c.gridx = 1;
+            c.weightx = 0.3;
+            c.gridwidth = 1;
+            c.ipady = 20;
+            paneOne.add(cb, c);
+            cb.setFont(f1);
+        }
+
+
         JLabel newName = new JLabel("Group name");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
-        c.gridy = 0;
+        c.gridy = 1;
         c.weightx = 0.1;
         c.ipady = 20;
         paneOne.add(newName, c);
@@ -269,7 +290,7 @@ public class UI extends JFrame implements Runnable  {
         final JTextField newGroupName = new JTextField();
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 1;
-        c.gridy = 0;
+        c.gridy = 1;
         c.weightx = 0.6;
         c.ipady = 20;
         paneOne.add(newGroupName, c);
@@ -278,27 +299,63 @@ public class UI extends JFrame implements Runnable  {
         JButton b = new JButton("Change");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
-        c.gridy = 0;
+        c.gridy = 1;
         c.gridx = 2;
         c.weightx = 0.3;
         c.gridwidth = 2;
         c.ipady = 20;
         if(change) {
             b.addActionListener(e1 -> {
-                optionFrame("Group name changed");
+                try {
+                    if(newGroupName.getText().length()>0) {
 
-                optionFrameErr("Group name is busy");
-//
-                setContentPane(mainMenu);
+                        JSONObject obj = new JSONObject();
+                        if(!jcb.getSelectedItem().equals("all")){
+                            obj.put("namingOld", jcb.getSelectedItem());
+                        }else{
+                            obj.put("namingOld", cb.getSelectedItem());
+                        }
+                        obj.put("namingNew", newGroupName.getText());
+
+                        String s = Sender.doPost("http://localhost:8891/api/table", obj, token);
+
+                        if (s.contains("40")) {
+                            throw new Exception();
+                        }
+                        optionFrame("Group name changed");
+                        mainMenu.remove(jcb);
+                        updateGroups();
+                        getAndUpdateTable();
+                        setContentPane(mainMenu);
+                    }else throw  new Exception();
+                }catch (Exception e){
+                    optionFrameErr("Group name is busy or incorrect");
+
+                }
             });
         }else{
             b.setText("Add group");
-            b.addActionListener(e1 -> {
-                optionFrame("New group added");
 
-                optionFrameErr("Group name is busy");
-                //TODO
-                setContentPane(mainMenu);
+            b.addActionListener(e1 -> {
+                try {
+                    if(newGroupName.getText().length()>0) {
+                        JSONObject obj = new JSONObject();
+                        obj.put("naming", newGroupName.getText());
+
+                        String s = Sender.doPut("http://localhost:8891/api/table", obj, token);
+
+                        if (s.contains("40")) {
+                            throw new Exception();
+                        }
+                        optionFrame("Group name added");
+                        mainMenu.remove(jcb);
+                        updateGroups();
+                        getAndUpdateTable();
+                        setContentPane(mainMenu);
+                    }else throw  new Exception();
+                }catch (Exception e){
+                    optionFrameErr("Group name is busy or incorrect");
+                }
             });
         }
 
@@ -308,7 +365,7 @@ public class UI extends JFrame implements Runnable  {
         JButton be = new JButton("Exit");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
-        c.gridy = 1;
+        c.gridy = 2;
         c.gridx = 2;
         c.weightx = 0.3;
         c.gridwidth = 2;
@@ -417,12 +474,76 @@ public class UI extends JFrame implements Runnable  {
         c.gridwidth = 2;
         c.ipady = 20;
 
+        //TODO change
         b.addActionListener(e -> {
-            //TODO change elem to DB  POST
-            optionFrame("Item was changed");
+            try{
+                if(newGroupName0.getText().length()>0&& newGroupName3.getText().length()>0) {
+                    for(int i = 0; i<4;i++) {
+                        boolean flag = true;
+                        JSONObject jsonObject = new JSONObject();
 
-            optionFrameErr("You can't change item with this params");
-            setContentPane(mainMenu);
+                        jsonObject.put("group", jcb.getSelectedItem());
+
+                        System.out.println("group " + jcb.getSelectedItem());
+
+                        jsonObject.put("id", Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()));
+
+
+                        switch (i) {
+                            case 0:
+
+                                if (!newGroupName0.getText().equals(table.getValueAt(table.getSelectedRow(), 1).toString())) {
+                                    jsonObject.put("field", "naming");
+                                    jsonObject.put("naming", newGroupName0.getText());
+                                    flag = false;
+                                }
+                                break;
+                            case 1:
+                                if (!newGroupName1.getText().equals(table.getValueAt(table.getSelectedRow(), 2).toString())) {
+                                    jsonObject.put("field", "description");
+                                    jsonObject.put("description", newGroupName1.getText());
+                                    flag = false;
+                                }
+                                break;
+                            case 2:
+                                if (!newGroupName2.getText().equals(table.getValueAt(table.getSelectedRow(), 3).toString())) {
+                                    jsonObject.put("field", "manufacturer");
+                                    jsonObject.put("manufacturer", newGroupName2.getText());
+                                    flag = false;
+                                }
+                                break;
+                            case 3:
+                                if (!newGroupName3.getText().equals(table.getValueAt(table.getSelectedRow(), 5).toString())) {
+                                    jsonObject.put("field", "price");
+                                    jsonObject.put("price", Integer.parseInt(newGroupName3.getText()));
+                                    flag = false;
+                                }
+                                break;
+                        }
+
+                        if (!flag) {
+                            System.out.println("json" + jsonObject);
+                            String s = Sender.doPost("http://localhost:8891/api/good", jsonObject, token);
+                            if (s.contains("40")) {
+                                throw new Exception();
+                            }
+                        }
+
+
+                    }
+                    optionFrame("Item was changed");
+                    getAndUpdateTable();
+                    setContentPane(mainMenu);
+                }else throw new Exception();
+            } catch (Exception e1) {
+                optionFrameErr("You can't change item with this params");
+                newGroupName0.setText(table.getValueAt(table.getSelectedRow(), 1).toString());
+                newGroupName1.setText(table.getValueAt(table.getSelectedRow(), 2).toString());
+                newGroupName2.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
+                newGroupName3.setText(table.getValueAt(table.getSelectedRow(), 5).toString());
+
+            }
+
         });
 
         paneOne.add(b, c);
@@ -663,9 +784,8 @@ public class UI extends JFrame implements Runnable  {
         c.ipady = 20;
 
         b.addActionListener(e -> {
-            //TODO add elem to DB  PUT
             try{
-
+//TODO add item
                 if(newNameTF.getText().length()>0&&quantityTF.getText().length()>0&&priceTF.getText().length()>0) {
 
                     JSONObject jsonObject = new JSONObject();
@@ -680,10 +800,9 @@ public class UI extends JFrame implements Runnable  {
                     jsonObject.put("price", Long.parseLong(priceTF.getText()));
                     jsonObject.put("quantity", Long.parseLong(quantityTF.getText()));
                     String s =Sender.doPut("http://localhost:8891/api/good", jsonObject, token);
-                    System.out.println("put"+s);
-                    System.out.println("group"+jcb.getSelectedItem());
-                    if(s.contains("409")) {
-                        System.out.println(s.contains("409"));
+                    System.out.println("put "+s);
+                    System.out.println("group "+jcb.getSelectedItem());
+                    if(s.contains("40")) {
                         throw new Exception();
 
                     }
@@ -732,7 +851,7 @@ public class UI extends JFrame implements Runnable  {
 
 
         JLabel quantity = new JLabel("Increase/Decrease quantity");
-        quantity .setHorizontalAlignment(JLabel.CENTER);
+        quantity.setHorizontalAlignment(JLabel.CENTER);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 1;
@@ -742,10 +861,11 @@ public class UI extends JFrame implements Runnable  {
         quantity.setFont(f1);
 
 
+        int value =  Integer.parseInt(table.getValueAt(table.getSelectedRow(), 4).toString());
         JSpinner spinner = new JSpinner(
-                new SpinnerNumberModel(1, //initial value
-                        -100, //minimum value
-                        100, //maximum value
+                new SpinnerNumberModel(  value, //initial value
+                        1, //minimum value
+                        value+300, //maximum value
                         1) //step
         );
         spinner.setEditor(new JSpinner.DefaultEditor(spinner));
@@ -758,7 +878,6 @@ public class UI extends JFrame implements Runnable  {
         paneOne.add(spinner, c);
         spinner.setFont(f1);
         spinner.addChangeListener(e->{
-            System.out.println(spinner.getValue());
         });
 
 
@@ -773,8 +892,26 @@ public class UI extends JFrame implements Runnable  {
 
         b.addActionListener(e -> {
             try{
+                //TODO spinner
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("group", jcb.getSelectedItem());
+                jsonObject.put("id", Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()));
+                jsonObject.put("field", "quantity");
+                jsonObject.put("quantity", spinner.getValue());
 
+                System.out.println("json"+jsonObject);
+
+                String s = Sender.doPost("http://localhost:8891/api/good", jsonObject, token);
+
+                if (s.contains("40")) {
+                    throw new Exception();
+                }
+
+                optionFrame("Quantity was successfully changed!");
+                getAndUpdateTable();
+                setContentPane(mainMenu);
             } catch (Exception e1) {
+                optionFrameErr("You can't change item quantity");
 
             }
         });
@@ -824,6 +961,19 @@ public class UI extends JFrame implements Runnable  {
             b8.setVisible(true);
             //System.out.println(table.getValueAt(table.getSelectedRow(), 0).toString());
         });
+
+
+
+
+        long price = 0;
+        for(int i = 0; i<table.getRowCount(); i++) {
+            price+= Integer.parseInt(table.getValueAt(i, 6).toString());
+        }
+
+
+        total.setText("Total price: "+price);
+        tableFilterUpdate();
+
     }
 
     private void optionFrame(String message){
@@ -866,17 +1016,99 @@ public class UI extends JFrame implements Runnable  {
                 tmp = Sender.doGet("http://localhost:8891/api/good/"+ jcb.getSelectedItem(), token);
             }else{
                 tmp = Sender.doGet("http://localhost:8891/api/"+ jcb.getSelectedItem(), token);
+
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mainMenu.remove(scrollPane);
-        updateJtable(parser(tmp));
+        if(tmp.length()>0) {
+            mainMenu.remove(scrollPane);
+            updateJtable(parser(tmp));
+        }
+    }
+
+    private void updateGroups(){
+        String tables= null;
+        try {
+            tables = Sender.doGet("http://localhost:8891/api/tables", token);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String[] tab = tables.split("\n");
+        ArrayList<String> tm = new ArrayList<>();
+        tm.add("all");
+        for(String t:tab) {
+            //System.out.println("tabs "+t);
+            tm.add(t);
+        }
+        jcb = new JComboBox(tm.toArray());
+
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 0.2;
+        c.gridwidth = 1;
+        c.gridy = 0;
+        c.gridx = 0;
+        c.ipady = 20;
+
+        jcb.addItemListener(itemEvent -> {
+            b5.setVisible(false);
+            b6.setVisible(false);
+            b7.setVisible(false);
+            b8.setVisible(false);
+            if (itemEvent.getSource() == jcb) {
+                getAndUpdateTable();
+            }
+            revalidate();
+            repaint();
+
+        });
+
+
+
+        mainMenu.add(jcb, c);
+        jcb.setFont(f1);
     }
 
 
 
+    private void tableFilterUpdate(){
+
+        TableRowSorter<TableModel> rowSorter
+                = new TableRowSorter<>(table.getModel());
+
+
+        table.setRowSorter(rowSorter);
+        jtfFilter.getDocument().addDocumentListener(new DocumentListener() {
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                String text = jtfFilter.getText();
+
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String text = jtfFilter.getText();
+
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+    }
 
     public static void main(String[] args) {
         new Thread(new UI()).start();
@@ -887,3 +1119,5 @@ public class UI extends JFrame implements Runnable  {
         init();
     }
 }
+
+
