@@ -26,7 +26,7 @@ public class StoreTableModel extends AbstractTableModel {
     }
 
     public int getColumnCount() {
-        return 6;
+        return 7;
     }
 
     public String getColumnName(int columnIndex) {
@@ -43,6 +43,8 @@ public class StoreTableModel extends AbstractTableModel {
                 return "quantity";
             case 5:
                 return "price";
+            case 6:
+                return "total";
         }
         return "";
     }
@@ -66,6 +68,8 @@ public class StoreTableModel extends AbstractTableModel {
                 return p.getQuantity();
             case 5:
                 return p.getPrice();
+            case 6:
+                return p.getPrice()*p.getQuantity();
         }
         return "";
     }

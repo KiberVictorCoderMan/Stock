@@ -57,17 +57,18 @@ public class Sender {
         JSONObject jsonObject3 = new JSONObject();
         jsonObject3.put("naming", "cars");
         token = aut("http://localhost:8891/login", "admin", "1234");
-        doPut("http://localhost:8891/api/good", jsonObject, token);
-        doPut("http://localhost:8891/api/good", jsonObject0, token);
-        doPut("http://localhost:8891/api/good", jsonObject1, token);
-        doPut("http://localhost:8891/api/table", jsonObject3, token);
+//        doPut("http://localhost:8891/api/good", jsonObject, token);
+//        doPut("http://localhost:8891/api/good", jsonObject0, token);
+//        doPut("http://localhost:8891/api/good", jsonObject1, token);
+//        doPut("http://localhost:8891/api/table", jsonObject3, token);
 
-        /*
-        doPost("http://localhost:8891/api/good", jsonObject2, token);
-        doGet("http://localhost:8891/api/all", token);
-        doGet("http://localhost:8891/api/tables", token);
-        */
-        doDelete("http://localhost:8891/api/good/fruits/1", token);
+       // doGet("http://localhost:8891/api/good/fruits", token);
+
+
+//        doPost("http://localhost:8891/api/good", jsonObject2, token);
+//        doGet("http://localhost:8891/api/all", token);
+//        doGet("http://localhost:8891/api/tables", token);
+      //  doDelete("http://localhost:8891/api/good/fruits/31", token);
     }
 
     public static String doPost(String urlpath, JSONObject json, String token) {
