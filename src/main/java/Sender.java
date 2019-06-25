@@ -16,23 +16,23 @@ public class Sender {
         String token;
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("group", "fruits");
-        jsonObject.put("description", "descrr");
-        jsonObject.put("manufacturer", "7");
-        jsonObject.put("naming", "item1");
-        jsonObject.put("price", 5);
-        jsonObject.put("quantity", 1234);
+        jsonObject.put("description", "descr");
+        jsonObject.put("manufacturer", "man");
+        jsonObject.put("naming", "test item");
+        jsonObject.put("price", 12);
+        jsonObject.put("quantity", 100);
 
 
 
         token = aut("http://localhost:8891/login", "admin", "1234");
-        //doPut("http://localhost:8891/api/good", jsonObject, token);
+        doPut("http://localhost:8891/api/good", jsonObject, token);
         //doPut("http://localhost:8891/api/good", jsonObject0, token);
        // doPost("http://localhost:8891/api/good", jsonObject2, token);
         //doGet("http://localhost:8891/api/tables", token);
-         doGet("http://localhost:8891/api/good/fruits", token);
+         //doGet("http://localhost:8891/api/good/fruits", token);
         //doGet("http://localhost:8891/api/good/fruits/1", token);
         //doGet("http://localhost:8891/api/tables", token);
-         doGet("http://localhost:8891/api/all", token);
+        // doGet("http://localhost:8891/api/all", token);
         //doDelete("http://localhost:8891/api/good/1_fruits", token);
     }
 
