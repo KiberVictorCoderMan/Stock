@@ -122,6 +122,8 @@ public class StockServiceJDBC {
     public void renameTable(String tableNameOld, String tableNameNew) throws SQLException {
         String SQL = "RENAME TABLE " + tableNameOld + " TO " + tableNameNew;
         statement.executeUpdate(SQL);
+        tablesList.remove(tableNameOld);
+        tablesList.remove(tableNameNew);
     }
 
     public void deleteProductId(String groupName, int id) throws SQLException {
