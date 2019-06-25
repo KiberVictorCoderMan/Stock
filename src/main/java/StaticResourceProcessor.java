@@ -79,9 +79,15 @@ public class StaticResourceProcessor implements Processor {
             String group = request.getURI().substring(request.getURI().indexOf("table/") + 6);
             response.sendText(deleteTable(group));
           } else if(request.getURI().contains("api/good")){
-            String group = request.getURI().substring(request.getURI().indexOf("good/") + 5, request.getURI().lastIndexOf("/"));
-            String id = request.getURI().substring(request.getURI().lastIndexOf("/") + 1);
-            response.sendText(delete(group, id));
+            if(request.getURI().substring(request.getURI().indexOf("good/") + 5).contains("naming:")) {
+                String group = request.getURI().substring(request.getURI().indexOf("good/") + 5, request.getURI().lastIndexOf("/"));
+                String naming = request.getURI().substring(request.getURI().lastIndexOf("/") + 8);
+                response.sendText(deleteName(group, naming));
+            }else {
+                String group = request.getURI().substring(request.getURI().indexOf("good/") + 5, request.getURI().lastIndexOf("/"));
+                String id = request.getURI().substring(request.getURI().lastIndexOf("/") + 1);
+                response.sendText(delete(group, id));
+            }
           }
         } else if (request.getType().equals("PUT") && request.getURI().equals("/api/good")) {
           response.sendText(put(request.getBody()));
@@ -325,6 +331,16 @@ public class StaticResourceProcessor implements Processor {
     }
     return "204 No Content";
   }
+
+    public String deleteName(String table, String naming) throws SQLException {
+        try{
+            stockServiceJDBC.deleteProduct(table, naming);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "404 Not Found";
+        }
+        return "204 No Content";
+    }
 
   public String deleteTable(String table) throws SQLException {
     try{

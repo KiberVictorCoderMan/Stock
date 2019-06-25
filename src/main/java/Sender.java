@@ -80,7 +80,7 @@ public class Sender {
 //        doGet("http://localhost:8891/api/all", token);
 //        doGet("http://localhost:8891/api/tables", token);
        // doPost("http://localhost:8891/api/table", jsonObject4, token);
-        //doDelete("http://localhost:8891/api/table/fruits", token);
+        doDelete("http://localhost:8891/api/good/fruits/naming:777777", token);
     }
 
     public static String doPost(String urlpath, JSONObject json, String token) {
