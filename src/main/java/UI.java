@@ -69,7 +69,7 @@ public class UI extends JFrame implements Runnable  {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            System.out.println("str "+tmp);
+        //    System.out.println("str "+tmp);
 
 
             // Інформаційна область
@@ -655,9 +655,11 @@ private  void groupFrame(boolean change) {
                     String s =Sender.doPut("http://localhost:8891/api/good", jsonObject, token);
                     System.out.println("put"+s);
                     System.out.println("group"+jcb.getSelectedItem());
-//                    if(!s.matches("201 Created"))
-//                        throw new Exception();
+                    if(s.contains("409")) {
+                        System.out.println(s.contains("409"));
+                        throw new Exception();
 
+                    }
                     optionFrame("Product was added");
                     getAndUpdateTable();
                     setContentPane(mainMenu);
