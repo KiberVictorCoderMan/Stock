@@ -1110,159 +1110,55 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="279" parent="6" name="buses"/>
-    <table id="280" parent="6" name="fruits"/>
-    <table id="281" parent="6" name="vegetables"/>
-    <column id="282" parent="279" name="id">
+    <table id="279" parent="6" name="fruits"/>
+    <column id="280" parent="279" name="id">
       <Position>1</Position>
       <DataType>mediumint(9)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="283" parent="279" name="naming">
+    <column id="281" parent="279" name="naming">
       <Position>2</Position>
       <DataType>varchar(26)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="284" parent="279" name="description">
+    <column id="282" parent="279" name="description">
       <Position>3</Position>
       <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="285" parent="279" name="manufacturer">
+    <column id="283" parent="279" name="manufacturer">
       <Position>4</Position>
       <DataType>varchar(26)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="286" parent="279" name="quantity">
+    <column id="284" parent="279" name="quantity">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="287" parent="279" name="price">
+    <column id="285" parent="279" name="price">
       <Position>6</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="288" parent="279" name="naming">
+    <index id="286" parent="279" name="naming">
       <ColNames>naming</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="289" parent="279" name="PRIMARY">
+    <key id="287" parent="279" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="290" parent="279" name="naming">
-      <ColNames>naming</ColNames>
-      <UnderlyingIndexName>naming</UnderlyingIndexName>
-    </key>
-    <column id="291" parent="280" name="id">
-      <Position>1</Position>
-      <DataType>mediumint(9)|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="292" parent="280" name="naming">
-      <Position>2</Position>
-      <DataType>varchar(26)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="293" parent="280" name="description">
-      <Position>3</Position>
-      <DataType>varchar(200)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="294" parent="280" name="manufacturer">
-      <Position>4</Position>
-      <DataType>varchar(26)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="295" parent="280" name="quantity">
-      <Position>5</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="296" parent="280" name="price">
-      <Position>6</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="297" parent="280" name="naming">
-      <ColNames>naming</ColNames>
-      <Unique>1</Unique>
-      <Type>btree</Type>
-    </index>
-    <key id="298" parent="280" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <key id="299" parent="280" name="naming">
-      <ColNames>naming</ColNames>
-      <UnderlyingIndexName>naming</UnderlyingIndexName>
-    </key>
-    <column id="300" parent="281" name="id">
-      <Position>1</Position>
-      <DataType>mediumint(9)|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="301" parent="281" name="naming">
-      <Position>2</Position>
-      <DataType>varchar(26)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="302" parent="281" name="description">
-      <Position>3</Position>
-      <DataType>varchar(200)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="303" parent="281" name="manufacturer">
-      <Position>4</Position>
-      <DataType>varchar(26)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="304" parent="281" name="quantity">
-      <Position>5</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="305" parent="281" name="price">
-      <Position>6</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="306" parent="281" name="naming">
-      <ColNames>naming</ColNames>
-      <Unique>1</Unique>
-      <Type>btree</Type>
-    </index>
-    <key id="307" parent="281" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <key id="308" parent="281" name="naming">
+    <key id="288" parent="279" name="naming">
       <ColNames>naming</ColNames>
       <UnderlyingIndexName>naming</UnderlyingIndexName>
     </key>

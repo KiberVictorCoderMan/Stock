@@ -37,7 +37,7 @@ public class Sender {
         jsonObject0.put("group", "fruits");
         jsonObject0.put("description", "6");
         jsonObject0.put("manufacturer", "4");
-        jsonObject0.put("naming", "777777");
+        jsonObject0.put("naming", "rrrr");
         jsonObject0.put("price", 5);
         jsonObject0.put("quantity", 1234);
 
@@ -51,9 +51,9 @@ public class Sender {
 
         JSONObject jsonObject2 = new JSONObject();
         jsonObject2.put("group", "fruits");
-        jsonObject2.put("id", 1);
-        jsonObject2.put("field", "quantity");
-        jsonObject2.put("quantity", 350);
+        jsonObject2.put("id", 4);
+        jsonObject2.put("field", "naming");
+        jsonObject2.put("naming", "yyyy");
 
         /*
         JSONObject jsonObject3 = new JSONObject();
@@ -79,7 +79,7 @@ public class Sender {
         doPost("http://localhost:8891/api/good", jsonObject2, token);
 //        doGet("http://localhost:8891/api/all", token);
 //        doGet("http://localhost:8891/api/tables", token);
-        doPost("http://localhost:8891/api/table", jsonObject4, token);
+       // doPost("http://localhost:8891/api/table", jsonObject4, token);
         //doDelete("http://localhost:8891/api/table/fruits", token);
     }
 
