@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="de984226-d10f-48b2-9951-2c35e1d9b4a6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e05c41db-236b-4adc-8387-d20a758bee9f.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e05c41db-236b-4adc-8387-d20a758bee9f.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Request.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Sender.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/StaticResourceProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StaticResourceProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/StockServiceJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StockServiceJDBC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Request.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Request.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Sender.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/StaticResourceProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/StaticResourceProcessor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Sender.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Sender.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/StaticResourceProcessor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/StockServiceJDBC.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/StockServiceJDBC.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -52,11 +48,6 @@
         <item name="stock@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="stock: schema" type="c314c289:MysqlImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="stock@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="collations" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
     </expand>
     <select />
@@ -106,30 +97,30 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="fruits" value="11" />
-          <entry key="java" value="52" />
+          <entry key="fruits" value="14" />
+          <entry key="java" value="53" />
           <entry key="sql" value="1" />
-          <entry key="vegetables" value="7" />
+          <entry key="vegetables" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Database Element" value="18" />
-          <entry key="JAVA" value="52" />
+          <entry key="Database Element" value="23" />
+          <entry key="JAVA" value="53" />
           <entry key="Scratch" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="1279" />
+          <entry key="java" value="1439" />
           <entry key="sql" value="13" />
-          <entry key="txt" value="13" />
+          <entry key="txt" value="36" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1279" />
-          <entry key="PLAIN_TEXT" value="13" />
+          <entry key="JAVA" value="1439" />
+          <entry key="PLAIN_TEXT" value="36" />
           <entry key="Scratch" value="13" />
         </counts>
       </usages-collector>
@@ -140,8 +131,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/StockServiceJDBC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="86">
-              <caret line="171" column="35" selection-start-line="171" selection-start-column="21" selection-end-line="171" selection-end-column="35" />
+            <state relative-caret-position="3196">
+              <caret line="188" selection-start-line="188" selection-end-line="188" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#8718#8719#0" expanded="true" />
@@ -160,11 +151,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/StaticResourceProcessor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="126" column="114" lean-forward="true" selection-start-line="126" selection-start-column="114" selection-end-line="126" selection-end-column="114" />
+            <state relative-caret-position="154">
+              <caret line="145" column="53" selection-start-line="145" selection-start-column="47" selection-end-line="145" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk-11.0.1/lib/src.zip!/java.base/java/lang/String.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="2035" selection-start-line="2035" selection-end-line="2035" />
+              <folding>
+                <element signature="e#81303#81304#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -187,32 +190,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Request.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="38" column="23" lean-forward="true" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
-              <folding>
-                <element signature="e#4520#4521#0" expanded="true" />
-                <element signature="e#4541#4542#0" expanded="true" />
-                <element signature="e#4852#4853#0" expanded="true" />
-                <element signature="e#4874#4875#0" expanded="true" />
-                <element signature="e#4925#4926#0" expanded="true" />
-                <element signature="e#4947#4948#0" expanded="true" />
-                <element signature="e#5002#5003#0" expanded="true" />
-                <element signature="e#5023#5024#0" expanded="true" />
-                <element signature="e#5082#5083#0" expanded="true" />
-                <element signature="e#5103#5104#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1951">
-              <caret line="63" column="24" lean-forward="true" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
+            <state relative-caret-position="293">
+              <caret line="54" column="38" lean-forward="true" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -253,6 +235,12 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>#############</find>
+      <find>putTable</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -269,9 +257,9 @@
         <option value="$PROJECT_DIR$/src/test/java/SenderTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/Crypto.java" />
         <option value="$PROJECT_DIR$/src/main/java/Request.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Sender.java" />
         <option value="$PROJECT_DIR$/src/main/java/StockServiceJDBC.java" />
         <option value="$PROJECT_DIR$/src/main/java/StaticResourceProcessor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Sender.java" />
       </list>
     </option>
   </component>
@@ -354,7 +342,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1561455096972" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1561456156987" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
@@ -430,7 +418,7 @@
       <workItem from="1561281380286" duration="328000" />
       <workItem from="1561309939040" duration="1590000" />
       <workItem from="1561381345988" duration="10942000" />
-      <workItem from="1561449554382" duration="5516000" />
+      <workItem from="1561449554382" duration="6584000" />
     </task>
     <task id="LOCAL-00001" summary="samofix lol">
       <created>1561310616833</created>
@@ -439,11 +427,18 @@
       <option name="project" value="LOCAL" />
       <updated>1561310616833</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="unique name delete i td">
+      <created>1561455160904</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1561455160904</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18600000" />
+    <option name="totallyTimeSpent" value="19668000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -458,7 +453,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.04338395" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3264642" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -473,12 +468,12 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Database" order="4" sideWeight="0.49773243" visible="true" weight="0.20309168" />
+      <window_info anchor="right" id="Database" order="4" sideWeight="0.49758455" visible="true" weight="0.20309168" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
       <window_info anchor="right" id="Maven Projects" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
-      <window_info anchor="right" id="Coverage" order="9" sideWeight="0.5022676" side_tool="true" visible="true" weight="0.20309168" />
+      <window_info anchor="right" id="Coverage" order="9" sideWeight="0.5024155" side_tool="true" visible="true" weight="0.20309168" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -489,7 +484,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="samofix lol" />
-    <option name="LAST_COMMIT_MESSAGE" value="samofix lol" />
+    <MESSAGE value="unique name delete i td" />
+    <option name="LAST_COMMIT_MESSAGE" value="unique name delete i td" />
   </component>
   <component name="editorHistoryManager">
     <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
@@ -597,73 +593,99 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ServletProcessor.java">
+    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/HttpServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Product.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StoreTableModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://e05c41db-236b-4adc-8387-d20a758bee9f/schema/stock/table/fruits">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/Request.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="38" column="23" lean-forward="true" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+          <folding>
+            <element signature="e#4520#4521#0" expanded="true" />
+            <element signature="e#4541#4542#0" expanded="true" />
+            <element signature="e#4852#4853#0" expanded="true" />
+            <element signature="e#4874#4875#0" expanded="true" />
+            <element signature="e#4925#4926#0" expanded="true" />
+            <element signature="e#4947#4948#0" expanded="true" />
+            <element signature="e#5002#5003#0" expanded="true" />
+            <element signature="e#5023#5024#0" expanded="true" />
+            <element signature="e#5082#5083#0" expanded="true" />
+            <element signature="e#5103#5104#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -800,31 +822,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/HttpServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="63" selection-start-line="63" selection-end-line="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Product.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1951">
-          <caret line="63" column="24" lean-forward="true" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/StockServiceJDBC.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="171" column="35" selection-start-line="171" selection-start-column="21" selection-end-line="171" selection-end-column="35" />
+        <state relative-caret-position="3196">
+          <caret line="188" selection-start-line="188" selection-end-line="188" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#8718#8719#0" expanded="true" />
@@ -840,17 +841,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StoreTableModel.java">
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.1/lib/src.zip!/java.base/java/lang/String.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        <state relative-caret-position="198">
+          <caret line="2035" selection-start-line="2035" selection-end-line="2035" />
+          <folding>
+            <element signature="e#81303#81304#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/StaticResourceProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="126" column="114" lean-forward="true" selection-start-line="126" selection-start-column="114" selection-end-line="126" selection-end-column="114" />
+        <state relative-caret-position="154">
+          <caret line="145" column="53" selection-start-line="145" selection-start-column="47" selection-end-line="145" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="54" column="38" lean-forward="true" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
         </state>
       </provider>
     </entry>

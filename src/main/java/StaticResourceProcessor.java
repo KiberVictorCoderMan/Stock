@@ -73,6 +73,8 @@ public class StaticResourceProcessor implements Processor {
           response.sendText(delete(group, id));
         } else if (request.getType().equals("PUT") && request.getURI().equals("/api/good")) {
           response.sendText(put(request.getBody()));
+        }  else if (request.getType().equals("PUT") && request.getURI().equals("/api/table")) {
+          response.sendText(putTable(request.getBody()));
         }
       }
 
@@ -120,7 +122,7 @@ public class StaticResourceProcessor implements Processor {
     JSONParser parser = new JSONParser();
     JSONObject jsonObject = null;
     jsonObject = (JSONObject) parser.parse(jsonStr);
-    if((long)jsonObject.get("quantity") < 0 && !getName((String) jsonObject.get("naming")).equals("404 Not Found")) {
+    if((long)jsonObject.get("quantity") < 0 || !getName((String) jsonObject.get("naming")).contains("404 Not Found")) {
       return "409 Conflict";
     }
     try {
@@ -132,6 +134,23 @@ public class StaticResourceProcessor implements Processor {
       } catch (Exception e2) {
         return "409 Conflict";
       }
+    }
+    return "201 Created";
+  }
+
+  public String putTable(String jsonStr) throws ParseException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, IOException, ClassNotFoundException, InvalidKeySpecException, InvalidAlgorithmParameterException, SQLException {
+    jsonStr = (cr.decrypt("345354345", jsonStr));
+    JSONParser parser = new JSONParser();
+    JSONObject jsonObject = null;
+    jsonObject = (JSONObject) parser.parse(jsonStr);
+    String nameGroup = (String)jsonObject.get("naming");
+    if(getAllTables().contains(nameGroup)) {
+      return "409 Conflict";
+    }
+    try {
+      stockServiceJDBC.createTable(nameGroup);
+    }catch (Exception e) {
+      return "409 Conflict";
     }
     return "201 Created";
   }
@@ -164,7 +183,6 @@ public class StaticResourceProcessor implements Processor {
       jsonObject.put("manufacturer", resultSet.getString("manufacturer"));
       jsonObject.put("id", resultSet.getString("id"));
     } catch (Exception e) {
-      e.printStackTrace();
       return "404 Not Found";
     }
     return "200 Ok " + jsonObject.toString();
