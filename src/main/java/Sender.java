@@ -71,7 +71,7 @@ public class Sender {
         doPut("http://localhost:8891/api/good", jsonObject1, token);
        // doPut("http://localhost:8891/api/table", jsonObject3, token);
 
-       // doGet("http://localhost:8891/api/good/fruits", token);
+        doGet("http://localhost:8891/api/good/naming:777777", token);
 
         JSONObject jsonObject4 = new JSONObject();
         jsonObject4.put("namingOld", "trucks");

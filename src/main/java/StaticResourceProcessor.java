@@ -66,7 +66,9 @@ public class StaticResourceProcessor implements Processor {
         } else if (request.getType().equals("POST") && request.getURI().equals("/api/table")) {
           response.sendText(postTable(request.getBody()));
         }else if (request.getType().equals("GET") && request.getURI().substring(0, request.getURI().lastIndexOf("/")).equals("/api/good")) {
-          if(isNumber(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)))response.sendText(get(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)));
+          if(request.getURI().substring(request.getURI().lastIndexOf("/") + 1).contains("naming:")) {
+              response.sendText(getName(request.getURI().substring(request.getURI().lastIndexOf("/") + 8)));
+          } else if(isNumber(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)))response.sendText(get(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)));
           else response.sendText(getAllTable(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)));
         } else if(request.getType().equals("GET") && request.getURI().equals("/api/all")) {
           response.sendText(getAll());
