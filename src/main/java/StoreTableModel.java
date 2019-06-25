@@ -1,4 +1,5 @@
 import javax.swing.event.TableModelListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.util.ArrayList;
@@ -6,7 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class StoreTableModel implements TableModel {
+public class StoreTableModel extends AbstractTableModel {
 
     private Set<TableModelListener> listeners = new HashSet<>();
 
@@ -33,7 +34,7 @@ public class StoreTableModel implements TableModel {
             case 0:
                 return "id";
             case 1:
-                return "product_name";
+                return "name";
             case 2:
                 return "description";
             case 3:
