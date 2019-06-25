@@ -7,7 +7,7 @@ public class StockServiceJDBC {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 
     static final String USER = "root";
-    static final String PASSWORD = "Mike2000";
+    static final String PASSWORD = "root";
 
     ArrayList<String> tablesList = new ArrayList<>();
 
