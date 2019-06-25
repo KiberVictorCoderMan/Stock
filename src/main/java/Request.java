@@ -92,6 +92,41 @@ public class Request implements ServletRequest {
     return 0;
   }
 
+  @Override
+  public ServletContext getServletContext() {
+    return null;
+  }
+
+  @Override
+  public AsyncContext startAsync() throws IllegalStateException {
+    return null;
+  }
+
+  @Override
+  public AsyncContext startAsync(ServletRequest servletRequest, ServletResponse servletResponse) throws IllegalStateException {
+    return null;
+  }
+
+  @Override
+  public boolean isAsyncStarted() {
+    return false;
+  }
+
+  @Override
+  public boolean isAsyncSupported() {
+    return false;
+  }
+
+  @Override
+  public AsyncContext getAsyncContext() {
+    return null;
+  }
+
+  @Override
+  public DispatcherType getDispatcherType() {
+    return null;
+  }
+
   public RequestDispatcher getRequestDispatcher(String path) {
     return null;
   }

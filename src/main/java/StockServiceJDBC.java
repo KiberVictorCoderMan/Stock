@@ -7,7 +7,7 @@ public class StockServiceJDBC {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 
     static final String USER = "root";
-    static final String PASSWORD = "Mike2000";
+    static final String PASSWORD = "root";
 
     ArrayList<String> tablesList = new ArrayList<>();
 
@@ -120,7 +120,7 @@ public class StockServiceJDBC {
     }
 
     public void deleteProductId(String groupName, int id) throws SQLException {
-        String SQL = "DELETE FROM " + groupName + " WHERE id = '" + id + "'";
+        String SQL = "DELETE FROM " + groupName + " WHERE id = " + id;
         statement.executeUpdate(SQL);
     }
 

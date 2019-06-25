@@ -67,8 +67,8 @@ public class StaticResourceProcessor implements Processor {
           response.sendText(getAll());
         } else if(request.getType().equals("GET") && request.getURI().equals("/api/tables")) {
           response.sendText(getAllTables());
-        }else if (request.getType().equals("DELETE") && request.getURI().substring(0, request.getURI().lastIndexOf("/")).equals("/api/good")) {
-          String group = request.getURI().substring(request.getURI().lastIndexOf("/") + 1, request.getURI().indexOf("_"));
+        }else if (request.getType().equals("DELETE")) {
+          String group = request.getURI().substring(request.getURI().indexOf("good/") + 5, request.getURI().lastIndexOf("/"));
           String id = request.getURI().substring(request.getURI().lastIndexOf("/") + 1);
           response.sendText(delete(group, id));
         } else if (request.getType().equals("PUT") && request.getURI().equals("/api/good")) {
@@ -286,7 +286,8 @@ public class StaticResourceProcessor implements Processor {
   public String delete(String table, String id) throws SQLException {
     try{
       stockServiceJDBC.deleteProductId(table, Integer.parseInt(id));
-    } catch (NullPointerException e) {
+    } catch (Exception e) {
+      e.printStackTrace();
       return "404 Not Found";
     }
     return "204 No Content";
