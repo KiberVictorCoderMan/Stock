@@ -206,7 +206,7 @@ public class StockServiceJDBC {
                 selectQ += " AND ";
             }
             if(i == 0) whereQ += tablesList.get(i) + "." + "naming = " + naming;
-            else whereQ += " AND " + tablesList.get(i) + "." + "naming = " + naming;
+            else whereQ += " AND " + tablesList.get(i) + "." + "naming = " + naming ;
 
         }
         String SQL = "SELECT " + selectQ + " FROM " + tables + " WHERE " + whereQ;
@@ -255,12 +255,28 @@ public class StockServiceJDBC {
         return sum;
     }
 
-    public void closeConnector() throws SQLException {
-        statement.close();
-        connection.close();
+    public ResultSet readItemByIndex(String tableName, int index){
+        ResultSet result = null;
+        try{
+            result = statement.executeQuery("SELECT * FROM "+tableName+" WHERE id = "+index);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
-    public ArrayList getAllTables(){
+    public ResultSet readItemByName(String tableName, String name){
+        ResultSet result = null;
+        try{
+            result = statement.executeQuery("SELECT * FROM "+tableName+" WHERE naming = '"+name+"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    public ArrayList<String> getAllTables(){
         return tablesList;
     }
 

@@ -68,13 +68,15 @@ public class StaticResourceProcessor implements Processor {
         }else if (request.getType().equals("GET") && request.getURI().substring(0, request.getURI().lastIndexOf("/")).equals("/api/good")) {
           if(request.getURI().substring(request.getURI().lastIndexOf("/") + 1).contains("naming:")) {
               response.sendText(getName(request.getURI().substring(request.getURI().lastIndexOf("/") + 8)));
-          } else if(isNumber(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)))response.sendText(get(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)));
+          }
           else response.sendText(getAllTable(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)));
         } else if(request.getType().equals("GET") && request.getURI().equals("/api/all")) {
           response.sendText(getAll());
         } else if(request.getType().equals("GET") && request.getURI().equals("/api/tables")) {
           response.sendText(getAllTables());
-        }else if (request.getType().equals("DELETE")) {
+        } else if(request.getType().equals("GET")) {
+          response.sendText(get(request.getURI().substring(5, request.getURI().lastIndexOf("/"))   , request.getURI().substring(request.getURI().lastIndexOf("/") + 1)));
+        } else if (request.getType().equals("DELETE")) {
           if(request.getURI().contains("api/table")){
             String group = request.getURI().substring(request.getURI().indexOf("table/") + 6);
             response.sendText(deleteTable(group));
@@ -111,11 +113,11 @@ public class StaticResourceProcessor implements Processor {
         } catch (Exception e) {
             jsonObject = (JSONObject) parser.parse(jsonStr.toString());
         }
-        if(get(String.valueOf(jsonObject.get("id"))).equals("404 Not Found")) return "404 Not Found";
         try {
             //    public void updateItem(String tableName, int index, String column, String value){
             String coll = (String)jsonObject.get("field");
             if(jsonObject.keySet().contains("id")) {
+              if(get(String.valueOf(jsonObject.get("group")), String.valueOf(jsonObject.get("id"))).equals("404 Not Found")) return "404 Not Found";
               try {
                 stockServiceJDBC.updateItem(
                         (String) jsonObject.get("group"),
@@ -130,16 +132,19 @@ public class StaticResourceProcessor implements Processor {
                         (long) jsonObject.get(coll));
               }
             } else {
+              System.out.println("55555555555555555555 " + String.valueOf(jsonObject.get("naming")));
+              if(getName(String.valueOf(jsonObject.get("naming"))).equals("404 Not Found")) return "404 Not Found";
               try {
+
                 stockServiceJDBC.updateItemName(
                         (String) jsonObject.get("group"),
-                        (String) jsonObject.get("name"),
+                        (String) jsonObject.get("naming"),
                         coll,
                         (String) jsonObject.get(coll));
               } catch (java.lang.ClassCastException e) {
                 stockServiceJDBC.updateItemName(
                         (String) jsonObject.get("group"),
-                        (String) jsonObject.get("name"),
+                        (String) jsonObject.get("naming"),
                         coll,
                         (long) jsonObject.get(coll));
               }
@@ -151,39 +156,6 @@ public class StaticResourceProcessor implements Processor {
         return "204 No Content";
     }
 
-    public String postName(String jsonStr) throws ParseException, SQLException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, IOException, ClassNotFoundException, InvalidKeySpecException, InvalidAlgorithmParameterException {
-        jsonStr = (cr.decrypt("345354345", jsonStr));
-        JSONParser parser = new JSONParser();
-        System.out.println(jsonStr);
-        JSONObject jsonObject = null;
-        try {
-            jsonObject = (JSONObject) parser.parse(jsonStr.toString());
-        } catch (Exception e) {
-            jsonObject = (JSONObject) parser.parse(jsonStr.toString());
-        }
-        if(get(String.valueOf(jsonObject.get("id"))).equals("404 Not Found")) return "404 Not Found";
-        try {
-            //    public void updateItem(String tableName, int index, String column, String value){
-            String coll = (String)jsonObject.get("field");
-            try {
-                stockServiceJDBC.updateItemName(
-                        (String) jsonObject.get("group"),
-                        (String)jsonObject.get("name"),
-                        coll,
-                        (String) jsonObject.get(coll));
-            }catch (java.lang.ClassCastException e) {
-                stockServiceJDBC.updateItemName(
-                        (String) jsonObject.get("group"),
-                        (String)jsonObject.get("name"),
-                        coll,
-                        (long) jsonObject.get(coll));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "409 Conflict";
-        }
-        return "204 No Content";
-    }
 
   public String postTable(String jsonStr) throws ParseException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, IOException, ClassNotFoundException, InvalidKeySpecException, InvalidAlgorithmParameterException {
     jsonStr = (cr.decrypt("345354345", jsonStr));
@@ -244,11 +216,31 @@ public class StaticResourceProcessor implements Processor {
     return "201 Created";
   }
 
-  public String get(String id) {
+  public String get(String group, String id) {
     JSONObject jsonObject = new JSONObject();
     try{
-      ResultSet resultSet = stockServiceJDBC.getProductId(Long.parseLong(id));
+      ResultSet resultSet = stockServiceJDBC.readItemByIndex(group, Integer.parseInt(id));
       resultSet.first();
+      jsonObject.put("naming", resultSet.getString("naming"));
+      jsonObject.put("quantity", resultSet.getString("quantity"));
+      jsonObject.put("description", resultSet.getString("description"));
+      jsonObject.put("manufacturer", resultSet.getString("manufacturer"));
+      jsonObject.put("id", resultSet.getString("id"));
+      jsonObject.put("price", resultSet.getString("price"));
+    } catch (Exception e) {
+      e.printStackTrace();
+      return "404 Not Found";
+    }
+    return  jsonObject.toString();
+  }
+//readItemByName
+/*
+  public String getName(String naming) {
+    JSONObject jsonObject = new JSONObject();
+    try{
+      ResultSet resultSet = stockServiceJDBC.getProductName(naming);
+      resultSet.first();
+      resultSet.next();
       jsonObject.put("naming", resultSet.getString("naming"));
       jsonObject.put("quantity", resultSet.getString("quantity"));
       jsonObject.put("description", resultSet.getString("description"));
@@ -262,23 +254,32 @@ public class StaticResourceProcessor implements Processor {
     System.out.println("200 Ok");
     return  jsonObject.toString();
   }
+*/
 
   public String getName(String naming) {
     JSONObject jsonObject = new JSONObject();
     try{
-      ResultSet resultSet = stockServiceJDBC.getProductName(naming);
-      resultSet.first();
-      jsonObject.put("naming", resultSet.getString("naming"));
-      jsonObject.put("quantity", resultSet.getString("quantity"));
-      jsonObject.put("description", resultSet.getString("description"));
-      jsonObject.put("manufacturer", resultSet.getString("manufacturer"));
-      jsonObject.put("id", resultSet.getString("id"));
-      jsonObject.put("price", resultSet.getString("price"));
+      for(String table : stockServiceJDBC.getAllTables()) {
+        ResultSet resultSet = stockServiceJDBC.readItemByName(table, naming);
+        resultSet.first();
+        try {
+          jsonObject.put("naming", resultSet.getString("naming"));
+          jsonObject.put("quantity", resultSet.getString("quantity"));
+          jsonObject.put("description", resultSet.getString("description"));
+          jsonObject.put("manufacturer", resultSet.getString("manufacturer"));
+          jsonObject.put("id", resultSet.getString("id"));
+          jsonObject.put("price", resultSet.getString("price"));
+        } catch (java.sql.SQLException e) {
+          continue;
+        }
+        return  jsonObject.toString();
+      }
     } catch (Exception e) {
+      e.printStackTrace();
       return "404 Not Found";
     }
     System.out.println("200 Ok");
-    return  jsonObject.toString();
+    return "404 Not Found";
   }
 
   public String getAll() {
