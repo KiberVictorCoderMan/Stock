@@ -43,7 +43,6 @@ public class SenderTest {
         jsonObject2.put("naming", "yyyy");
 
         JSONObject jsonObject5 = new JSONObject();
-        jsonObject5.put("group", "fruits");
         jsonObject5.put("naming", "rrrr");
         jsonObject5.put("field", "price");
         jsonObject5.put("price", 500);
@@ -71,9 +70,9 @@ public class SenderTest {
         s.doPost("http://localhost:8891/api/table", jsonObject4, token);
         s.doPost("http://localhost:8891/api/good", jsonObject2, token);
         s.doPost("http://localhost:8891/api/good", jsonObject5, token);
-        s.doDelete("http://localhost:8891/api/good/fruits/naming:9999", token);
+        s.doDelete("http://localhost:8891/api/good/naming:rrrr", token);
         s.doDelete("http://localhost:8891/api/good/fruits/1", token);
-        s.doDelete("http://localhost:8891/api/table/fruits", token);
+      //  s.doDelete("http://localhost:8891/api/table/fruits", token);
     }
 
 }

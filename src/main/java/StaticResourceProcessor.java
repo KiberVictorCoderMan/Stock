@@ -82,9 +82,8 @@ public class StaticResourceProcessor implements Processor {
             response.sendText(deleteTable(group));
           } else if(request.getURI().contains("api/good")){
             if(request.getURI().substring(request.getURI().indexOf("good/") + 5).contains("naming:")) {
-                String group = request.getURI().substring(request.getURI().indexOf("good/") + 5, request.getURI().lastIndexOf("/"));
                 String naming = request.getURI().substring(request.getURI().lastIndexOf("/") + 8);
-                response.sendText(deleteName(group, naming));
+                response.sendText(deleteName(naming));
             }else {
                 String group = request.getURI().substring(request.getURI().indexOf("good/") + 5, request.getURI().lastIndexOf("/"));
                 String id = request.getURI().substring(request.getURI().lastIndexOf("/") + 1);
@@ -137,13 +136,13 @@ public class StaticResourceProcessor implements Processor {
               try {
 
                 stockServiceJDBC.updateItemName(
-                        (String) jsonObject.get("group"),
+                        getNameGroup((String) jsonObject.get("naming")),
                         (String) jsonObject.get("naming"),
                         coll,
                         (String) jsonObject.get(coll));
               } catch (java.lang.ClassCastException e) {
                 stockServiceJDBC.updateItemName(
-                        (String) jsonObject.get("group"),
+                        getNameGroup((String) jsonObject.get("naming")),
                         (String) jsonObject.get("naming"),
                         coll,
                         (long) jsonObject.get(coll));
@@ -282,6 +281,32 @@ public class StaticResourceProcessor implements Processor {
     return "404 Not Found";
   }
 
+  public String getNameGroup(String naming) {
+    JSONObject jsonObject = new JSONObject();
+    try{
+      for(String table : stockServiceJDBC.getAllTables()) {
+        ResultSet resultSet = stockServiceJDBC.readItemByName(table, naming);
+        resultSet.first();
+        try {
+          jsonObject.put("naming", resultSet.getString("naming"));
+          jsonObject.put("quantity", resultSet.getString("quantity"));
+          jsonObject.put("description", resultSet.getString("description"));
+          jsonObject.put("manufacturer", resultSet.getString("manufacturer"));
+          jsonObject.put("id", resultSet.getString("id"));
+          jsonObject.put("price", resultSet.getString("price"));
+        } catch (java.sql.SQLException e) {
+          continue;
+        }
+        return table;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      return "404 Not Found";
+    }
+    System.out.println("200 Ok");
+    return "404 Not Found";
+  }
+
   public String getAll() {
     JSONObject jsonObject = new JSONObject();
     String allDb = "";
@@ -383,9 +408,9 @@ public class StaticResourceProcessor implements Processor {
     return "204 No Content";
   }
 
-    public String deleteName(String table, String naming) throws SQLException {
+    public String deleteName(String naming) {
         try{
-            stockServiceJDBC.deleteProduct(table, naming);
+            stockServiceJDBC.deleteProduct(getNameGroup(naming), naming);
         } catch (Exception e) {
             e.printStackTrace();
             return "404 Not Found";
