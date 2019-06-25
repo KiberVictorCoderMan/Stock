@@ -43,9 +43,9 @@ public class SenderTest {
         jsonObject2.put("naming", "yyyy");
 
         JSONObject jsonObject5 = new JSONObject();
-        jsonObject5.put("naming", "rrrr");
-        jsonObject5.put("field", "price");
-        jsonObject5.put("price", 500);
+        jsonObject5.put("_naming", "9999");
+        jsonObject5.put("field", "naming");
+        jsonObject5.put("naming", "mikhail loh");
 
 
         JSONObject jsonObject3 = new JSONObject();
@@ -58,20 +58,20 @@ public class SenderTest {
         s.doPut("http://localhost:8891/api/good", jsonObject, token);
         s.doPut("http://localhost:8891/api/good", jsonObject0, token);
         s.doPut("http://localhost:8891/api/good", jsonObject1, token);
-        s.doPut("http://localhost:8891/api/table", jsonObject3, token);
-        s.doPut("http://localhost:8891/api/table", jsonObject3, token);
+        //s.doPut("http://localhost:8891/api/table", jsonObject3, token);
+        //s.doPut("http://localhost:8891/api/table", jsonObject3, token);
         s.doGet("http://localhost:8891/api/fruits/1", token);
         JSONObject jsonObject4 = new JSONObject();
         jsonObject4.put("namingOld", "vegetables");
         jsonObject4.put("namingNew", "dish");
-        s.doPost("http://localhost:8891/api/good", jsonObject5, token);
+        //s.doPost("http://localhost:8891/api/good", jsonObject5, token);
         s.doGet("http://localhost:8891/api/all", token);
         s.doGet("http://localhost:8891/api/tables", token);
         s.doPost("http://localhost:8891/api/table", jsonObject4, token);
         s.doPost("http://localhost:8891/api/good", jsonObject2, token);
         s.doPost("http://localhost:8891/api/good", jsonObject5, token);
-        s.doDelete("http://localhost:8891/api/good/naming:rrrr", token);
-        s.doDelete("http://localhost:8891/api/good/fruits/1", token);
+       // s.doDelete("http://localhost:8891/api/good/naming:rrrr", token);
+       // s.doDelete("http://localhost:8891/api/good/fruits/1", token);
       //  s.doDelete("http://localhost:8891/api/table/fruits", token);
     }
 

@@ -131,19 +131,24 @@ public class StaticResourceProcessor implements Processor {
                         (long) jsonObject.get(coll));
               }
             } else {
-              System.out.println("55555555555555555555 " + String.valueOf(jsonObject.get("naming")));
-              if(getName(String.valueOf(jsonObject.get("naming"))).equals("404 Not Found")) return "404 Not Found";
+                String naming;
+                try {
+                    naming = (String) jsonObject.get("_naming");
+                } catch (Exception e) {
+                    naming = (String) jsonObject.get("naming");
+                }
+              if(getName(naming).equals("404 Not Found")) return "404 Not Found";
               try {
 
                 stockServiceJDBC.updateItemName(
-                        getNameGroup((String) jsonObject.get("naming")),
-                        (String) jsonObject.get("naming"),
+                        getNameGroup(naming),
+                        naming,
                         coll,
                         (String) jsonObject.get(coll));
               } catch (java.lang.ClassCastException e) {
                 stockServiceJDBC.updateItemName(
-                        getNameGroup((String) jsonObject.get("naming")),
-                        (String) jsonObject.get("naming"),
+                        getNameGroup(naming),
+                        naming,
                         coll,
                         (long) jsonObject.get(coll));
               }
