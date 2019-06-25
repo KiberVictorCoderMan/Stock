@@ -1110,7 +1110,7 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="279" parent="6" name="cars"/>
+    <table id="279" parent="6" name="buses"/>
     <table id="280" parent="6" name="fruits"/>
     <table id="281" parent="6" name="vegetables"/>
     <column id="282" parent="279" name="id">

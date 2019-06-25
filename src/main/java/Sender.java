@@ -24,6 +24,7 @@ public class Sender {
     //    public Product(String group, String productName, String description, String producer, int quantity, int price ){
     public static void main(String[] args) throws Exception {
         String token;
+
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("group", "fruits");
         jsonObject.put("description", "6");
@@ -54,21 +55,32 @@ public class Sender {
         jsonObject2.put("field", "quantity");
         jsonObject2.put("quantity", 350);
 
+        /*
         JSONObject jsonObject3 = new JSONObject();
-        jsonObject3.put("naming", "cars");
+        jsonObject3.put("group", "fruits");
+        jsonObject3.put("id", 1);
+        jsonObject3.put("field", "price");
+        jsonObject3.put("price", 350);
+*/
+
+        JSONObject jsonObject3 = new JSONObject();
+        jsonObject3.put("naming", "trucks");
         token = aut("http://localhost:8891/login", "admin", "1234");
-       // doPut("http://localhost:8891/api/good", jsonObject, token);
-        //doPut("http://localhost:8891/api/good", jsonObject0, token);
-      //  doPut("http://localhost:8891/api/good", jsonObject1, token);
-//        doPut("http://localhost:8891/api/table", jsonObject3, token);
+        doPut("http://localhost:8891/api/good", jsonObject, token);
+        doPut("http://localhost:8891/api/good", jsonObject0, token);
+        doPut("http://localhost:8891/api/good", jsonObject1, token);
+       // doPut("http://localhost:8891/api/table", jsonObject3, token);
 
        // doGet("http://localhost:8891/api/good/fruits", token);
 
-
-//        doPost("http://localhost:8891/api/good", jsonObject2, token);
+        JSONObject jsonObject4 = new JSONObject();
+        jsonObject4.put("namingOld", "trucks");
+        jsonObject4.put("namingNew", "buses");
+        doPost("http://localhost:8891/api/good", jsonObject2, token);
 //        doGet("http://localhost:8891/api/all", token);
 //        doGet("http://localhost:8891/api/tables", token);
-        doDelete("http://localhost:8891/api/good/fruits/2", token);
+        doPost("http://localhost:8891/api/table", jsonObject4, token);
+        //doDelete("http://localhost:8891/api/table/fruits", token);
     }
 
     public static String doPost(String urlpath, JSONObject json, String token) {

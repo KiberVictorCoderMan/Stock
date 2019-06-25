@@ -119,6 +119,11 @@ public class StockServiceJDBC {
         statement.executeUpdate(SQL);
     }
 
+    public void renameTable(String tableNameOld, String tableNameNew) throws SQLException {
+        String SQL = "RENAME TABLE " + tableNameOld + " TO " + tableNameNew;
+        statement.executeUpdate(SQL);
+    }
+
     public void deleteProductId(String groupName, int id) throws SQLException {
         String SQL = "DELETE FROM " + groupName + " WHERE id = " + id;
         statement.executeUpdate(SQL);

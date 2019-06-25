@@ -7,15 +7,17 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
 
 public class StaticResourceProcessor implements Processor {
 
@@ -24,18 +26,19 @@ public class StaticResourceProcessor implements Processor {
   private StockServiceJDBC stockServiceJDBC = new StockServiceJDBC();
   private static HashMap<String, String> tokensUsers = new HashMap();
   private static HashMap<String, String> loginsAndPasswords = new HashMap<>();
+  private static final SecureRandom secureRandom = new SecureRandom(); //threadsafe
+  private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder(); //threadsafe
+
   static byte[] key = "MZygpewJsCpRrfOr".getBytes(StandardCharsets.UTF_8);
 
   public StaticResourceProcessor() throws SQLException, ClassNotFoundException {
     loginsAndPasswords.put("admin", Hash.md5("1234"));
   }
 
-  private String tokenGen() {
-    SecureRandom random = new SecureRandom();
-    byte bytes[] = new byte[20];
-    random.nextBytes(bytes);
-    String token = bytes.toString().substring(0, 10);
-    return token;
+  public static String tokenGen() {
+    byte[] randomBytes = new byte[24];
+    secureRandom.nextBytes(randomBytes);
+    return base64Encoder.encodeToString(randomBytes).substring(1, 11);
   }
 
   public boolean isNumber(String str) {
@@ -60,7 +63,9 @@ public class StaticResourceProcessor implements Processor {
 //        System.out.println(request.getBody().substring(0, request.getBody().indexOf("}")));
         if (request.getType().equals("POST") && request.getURI().equals("/api/good")) {
           response.sendText(post(request.getBody()));
-        } else if (request.getType().equals("GET") && request.getURI().substring(0, request.getURI().lastIndexOf("/")).equals("/api/good")) {
+        } else if (request.getType().equals("POST") && request.getURI().equals("/api/table")) {
+          response.sendText(postTable(request.getBody()));
+        }else if (request.getType().equals("GET") && request.getURI().substring(0, request.getURI().lastIndexOf("/")).equals("/api/good")) {
           if(isNumber(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)))response.sendText(get(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)));
           else response.sendText(getAllTable(request.getURI().substring(request.getURI().lastIndexOf("/") + 1)));
         } else if(request.getType().equals("GET") && request.getURI().equals("/api/all")) {
@@ -68,9 +73,14 @@ public class StaticResourceProcessor implements Processor {
         } else if(request.getType().equals("GET") && request.getURI().equals("/api/tables")) {
           response.sendText(getAllTables());
         }else if (request.getType().equals("DELETE")) {
-          String group = request.getURI().substring(request.getURI().indexOf("good/") + 5, request.getURI().lastIndexOf("/"));
-          String id = request.getURI().substring(request.getURI().lastIndexOf("/") + 1);
-          response.sendText(delete(group, id));
+          if(request.getURI().contains("api/table")){
+            String group = request.getURI().substring(request.getURI().indexOf("table/") + 6);
+            response.sendText(deleteTable(group));
+          } else if(request.getURI().contains("api/good")){
+            String group = request.getURI().substring(request.getURI().indexOf("good/") + 5, request.getURI().lastIndexOf("/"));
+            String id = request.getURI().substring(request.getURI().lastIndexOf("/") + 1);
+            response.sendText(delete(group, id));
+          }
         } else if (request.getType().equals("PUT") && request.getURI().equals("/api/good")) {
           response.sendText(put(request.getBody()));
         }  else if (request.getType().equals("PUT") && request.getURI().equals("/api/table")) {
@@ -115,6 +125,27 @@ public class StaticResourceProcessor implements Processor {
       return "409 Conflict";
     }
     return "204 No Content";
+  }
+
+  public String postTable(String jsonStr) throws ParseException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, IOException, ClassNotFoundException, InvalidKeySpecException, InvalidAlgorithmParameterException {
+    jsonStr = (cr.decrypt("345354345", jsonStr));
+    JSONParser parser = new JSONParser();
+    System.out.println(jsonStr);
+    JSONObject jsonObject = null;
+    try {
+      jsonObject = (JSONObject) parser.parse(jsonStr.toString());
+    } catch (Exception e) {
+      jsonObject = (JSONObject) parser.parse(jsonStr.toString());
+    }
+    if (!stockServiceJDBC.getAllTables().contains(jsonObject.get("namingOld"))) return "404 Not Found";
+    try {
+      stockServiceJDBC.renameTable((String) jsonObject.get("namingOld"), (String)jsonObject.get("namingNew"));
+    } catch (Exception e) {
+      e.printStackTrace();
+      return "409 Conflict";
+    }
+    return "204 No Content";
+
   }
 
   public String put(String jsonStr) throws ParseException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, IOException, ClassNotFoundException, InvalidKeySpecException, InvalidAlgorithmParameterException, SQLException {
@@ -286,6 +317,16 @@ public class StaticResourceProcessor implements Processor {
   public String delete(String table, String id) throws SQLException {
     try{
       stockServiceJDBC.deleteProductId(table, Integer.parseInt(id));
+    } catch (Exception e) {
+      e.printStackTrace();
+      return "404 Not Found";
+    }
+    return "204 No Content";
+  }
+
+  public String deleteTable(String table) throws SQLException {
+    try{
+      stockServiceJDBC.dropTable(table);
     } catch (Exception e) {
       e.printStackTrace();
       return "404 Not Found";
