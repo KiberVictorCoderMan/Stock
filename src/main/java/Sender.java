@@ -8,32 +8,60 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
+import org.json.simple.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.CacheRequest;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+
 public class Sender {
 
     static Crypto cr = new Crypto();
-//    public Product(String group, String productName, String description, String producer, int quantity, int price ){
+    //    public Product(String group, String productName, String description, String producer, int quantity, int price ){
     public static void main(String[] args) throws Exception {
         String token;
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("group", "fruits");
-        jsonObject.put("description", "descr");
-        jsonObject.put("manufacturer", "man");
-        jsonObject.put("naming", "test item");
-        jsonObject.put("price", 12);
-        jsonObject.put("quantity", 100);
+        jsonObject.put("description", "6");
+        jsonObject.put("manufacturer", "4");
+        jsonObject.put("naming", "9999");
+        jsonObject.put("price", 5);
+        jsonObject.put("quantity", 1234);
 
+        JSONObject jsonObject0 = new JSONObject();
+        jsonObject0.put("group", "fruits");
+        jsonObject0.put("description", "6");
+        jsonObject0.put("manufacturer", "4");
+        jsonObject0.put("naming", "777777");
+        jsonObject0.put("price", 5);
+        jsonObject0.put("quantity", 1234);
 
+        JSONObject jsonObject1 = new JSONObject();
+        jsonObject1.put("group", "vegetables");
+        jsonObject1.put("description", "6");
+        jsonObject1.put("manufacturer", "4");
+        jsonObject1.put("naming", "777777");
+        jsonObject1.put("price", 5);
+        jsonObject1.put("quantity", 1234);
 
+        JSONObject jsonObject2 = new JSONObject();
+        jsonObject2.put("group", "fruits");
+        jsonObject2.put("id", 1);
+        jsonObject2.put("field", "quantity");
+        jsonObject2.put("quantity", 350);
         token = aut("http://localhost:8891/login", "admin", "1234");
         doPut("http://localhost:8891/api/good", jsonObject, token);
-        //doPut("http://localhost:8891/api/good", jsonObject0, token);
-       // doPost("http://localhost:8891/api/good", jsonObject2, token);
-        //doGet("http://localhost:8891/api/tables", token);
-         //doGet("http://localhost:8891/api/good/fruits", token);
-        //doGet("http://localhost:8891/api/good/fruits/1", token);
-        //doGet("http://localhost:8891/api/tables", token);
-        // doGet("http://localhost:8891/api/all", token);
-        //doDelete("http://localhost:8891/api/good/1_fruits", token);
+        doPut("http://localhost:8891/api/good", jsonObject0, token);
+        doPut("http://localhost:8891/api/good", jsonObject1, token);
+        /*
+        doPost("http://localhost:8891/api/good", jsonObject2, token);
+        doGet("http://localhost:8891/api/all", token);
+        doGet("http://localhost:8891/api/tables", token);
+        doDelete("http://localhost:8891/api/good/fruits/1", token);*/
     }
 
     public static String doPost(String urlpath, JSONObject json, String token) {

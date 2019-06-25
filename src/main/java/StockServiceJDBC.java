@@ -3,12 +3,11 @@ import java.util.ArrayList;
 
 public class StockServiceJDBC {
     //static final String DATABASE_URL = "jdbc:mysql://localhost:3306/stock?autoReconnect=true&useSSL=false";\\
-    static final String DATABASE_URL = "jdbc:mysql://localhost:3306/stock?autoReconnect=true&useSSL=false";
+    static final String DATABASE_URL = "jdbc:mysql://localhost:3306/stock";
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 
     static final String USER = "root";
-    //root
-    static final String PASSWORD = "Mike2000";
+    static final String PASSWORD = "root";
 
     ArrayList<String> tablesList = new ArrayList<>();
 
@@ -92,6 +91,15 @@ public class StockServiceJDBC {
         }
     }
 
+    public void updateItem(String tableName, long index, String column, long value){
+        try{
+            statement.executeUpdate("UPDATE "+tableName+" SET "+column+" = "+
+                    "'"+value+"'"+" WHERE id = "+index);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 /*
     public void insertProduct(String groupName, String product, String description, String manufacturer, long priceProduct,  long newNumberOfProduct) throws SQLException {
         String SQL = "INSERT INTO " + groupName + " VALUES ('" + product + "', '" + description + "', '" + manufacturer + "', " + priceProduct + ", " + newNumberOfProduct + ", " + idGen +  ")";
@@ -160,12 +168,26 @@ public class StockServiceJDBC {
         return statement.executeQuery(SQL);
     }
 
-    public void deleteProductId(String groupName, int id) throws SQLException {
-        String SQL = "DELETE FROM " + groupName + " WHERE id = '" + id + "'";
-        statement.executeUpdate(SQL);
+
+    public ResultSet getProductName(String naming) throws SQLException {
+        String tables = "";
+        String selectQ = "";
+        String whereQ = "";
+        for(int i = 0; i < tablesList.size(); i++) {
+            tables += tablesList.get(i);
+            selectQ += tablesList.get(i) + ".naming, " + tablesList.get(i) + ".description, " + tablesList.get(i) + ".manufacturer, " + tablesList.get(i) + ".id, " + tablesList.get(i) + ".price, " + tablesList.get(i) + ".quantity";
+            if(i != tablesList.size() - 1) {
+                tables += ", ";
+                selectQ += " AND ";
+            }
+            if(i == 0) whereQ += tablesList.get(i) + "." + "naming = " + naming;
+            else whereQ += " AND " + tablesList.get(i) + "." + "naming = " + naming;
+
+        }
+        String SQL = "SELECT " + selectQ + " FROM " + tables + " WHERE " + whereQ;
+        System.out.println("************** " + SQL);
+        return statement.executeQuery(SQL);
     }
-
-
 
     public void delete(long idPr) throws SQLException {
         String tables = "";
@@ -213,39 +235,8 @@ public class StockServiceJDBC {
         connection.close();
     }
 
-
-
-
     public ArrayList getAllTables(){
         return tablesList;
     }
-
-    public static void main(String[] args) {
-        try {
-            StockServiceJDBC db = new StockServiceJDBC();
-//            db.createTable("vegetables");
-//            db.insertProduct("vegetables","item1","some descriptiomn","me",12,3);
-//            db.insertProduct("vegetables","item two","some description","not me",100,12);
-//            db.insertProduct("vegetables","item3","description","kkk inc.",33,3);
-//            db.insertProduct("vegetables","item 4","description4","nz ind.",41,145);
-//            db.insertProduct("vegetables","item 5","description 5","coin",50,1);
-
-          //  db.insertProduct("fruits","item 3","description","kkk inc.",27,87);
-//            db.insertProduct("fruits","product ","desc","book",15,67);
-//            db.insertProduct("fruits","bigitem","text information","she",32,5);
-//
-//
-//            db.createTable("metal");
-//            db.insertProduct("metal","black sabbath","a little bit text","lil",14,87);
-//            db.insertProduct("metal","metal two","description","manufacturer",1,100);
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
-
 
 }
