@@ -50,7 +50,7 @@ public class UI extends JFrame implements Runnable  {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        //  autentificationFrame();
+        autentificationFrame();
 
     }
 
@@ -73,7 +73,7 @@ public class UI extends JFrame implements Runnable  {
         mainMenu.add(total, c);
         total.setFont(f1);
 
-        //TODO show all
+
         String tmp = null;
         try {
             tmp = Sender.doGet("http://localhost:8891/api/all", token);
@@ -197,8 +197,8 @@ public class UI extends JFrame implements Runnable  {
                 //TODO delete
                 if(!jcb.getSelectedItem().equals("all"))
                     Sender.doDelete("http://localhost:8891/api/good/"+jcb.getSelectedItem()+"/"+table.getValueAt(table.getSelectedRow(), 0).toString(), token);
-//                else
-//                    Sender.doDelete("http://localhost:8891/api/good/"+jcb.getSelectedItem()+"/"+table.getValueAt(table.getSelectedRow(), 0).toString(), token);
+                else
+                   Sender.doDelete("http://localhost:8891/api/good/naming:"+table.getValueAt(table.getSelectedRow(), 1).toString(), token);
                 getAndUpdateTable();
                 JOptionPane.showMessageDialog(paneOne, "Item deleted!",
                         "Message", JOptionPane.INFORMATION_MESSAGE);
@@ -484,10 +484,11 @@ public class UI extends JFrame implements Runnable  {
 
                         jsonObject.put("group", jcb.getSelectedItem());
 
-                        System.out.println("group " + jcb.getSelectedItem());
-
-                        jsonObject.put("id", Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()));
-
+//                        System.out.println("group " + jcb.getSelectedItem());
+                        if(jcb.getSelectedItem().equals("all"))
+                            jsonObject.put("_naming", table.getValueAt(table.getSelectedRow(), 1).toString());
+                        else
+                            jsonObject.put("id", Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()));
 
                         switch (i) {
                             case 0:
